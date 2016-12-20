@@ -10,6 +10,7 @@ $loader
         [
             'MyApp\Controllers' => $config->application->controllersDir,
             'MyApp\Controllers\Test' => $config->application->controllersDir . 'test/',
+            'MyApp\Controllers\Admin' => $config->application->controllersDir . 'admin/',
 
             'MyApp\Models' => $config->application->modelsDir,
             'MyApp\Models\Test' => $config->application->modelsDir . 'test/',
