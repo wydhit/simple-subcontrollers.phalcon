@@ -12,5 +12,10 @@ class HplusController extends ControllerBase
         return $this->view->render('admin/hplus', 'index');
     }
 
+    public function listAction()
+    {
+        return $this->view->render('admin/hplus', 'list');
+    }
+
 }
 
