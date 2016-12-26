@@ -34,6 +34,7 @@ return [
     ],
     // 定时执行的脚本
     'cron-tasks' => [
-        // ['class' => MyApp\Tasks\System\CronTask::class, 'action' => 'testAction', 'params' => []],
+        ['class' => MyApp\Tasks\Test\Test1Task::class, 'action' => 'mainAction', 'params' => []],
+        ['class' => MyApp\Tasks\Test\Test2Task::class, 'action' => 'mainAction', 'params' => []],
     ],
 ];
