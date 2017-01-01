@@ -23,6 +23,18 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function listAction()
+    {
+        $func = function () {
+            return [true, "Hello World"];
+        };
+        $res = $func();
+        list($status, $msg) = $func();
+        dump($res);
+        dump($status);
+        dump($msg);
+    }
+
     public function arAction()
     {
         $func = function () {
