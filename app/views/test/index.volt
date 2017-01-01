@@ -28,6 +28,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/qx') }}">测试权限</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/path') }}">相对路径->绝对路径</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/logical') }}">逻辑运算</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/index/print') }}">格式化输出</a>
             </div>
             <div class="col-md-12">
                 <h3>

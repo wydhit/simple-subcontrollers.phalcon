@@ -23,6 +23,13 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function printAction()
+    {
+        printf("Hello World!%s,The time is %d", "limx", time());
+        $str = sprintf("Hello World!%s,The time is %d", "limx", time());
+        dump($str);
+    }
+
     public function logicalAction()
     {
         $foo = "Hello World";
