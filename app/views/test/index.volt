@@ -29,6 +29,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/path') }}">相对路径->绝对路径</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/logical') }}">逻辑运算</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/print') }}">格式化输出</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/index/ar') }}">不定输入参数</a>
             </div>
             <div class="col-md-12">
                 <h3>

@@ -23,6 +23,20 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function arAction()
+    {
+        $func = function () {
+//            $count = func_num_args();
+//            for ($i = 0; $i < $count; $i++) {
+//                $param[] = func_get_arg($i);
+//            }
+//            return $param;
+            return func_get_args();
+        };
+        $res = $func(1, 2, 3, 4, 5);
+        dump($res);
+    }
+
     public function printAction()
     {
         printf("Hello World!%s,The time is %d", "limx", time());
