@@ -23,6 +23,14 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function strposAction()
+    {
+        dump(strpos("lalalala", "l"));
+        dump(strpos("lalalala", "l1"));
+        dump(mb_strpos("lalalala", "a"));
+        dump(mb_strpos("lalala", "l1"));
+    }
+
     public function listAction()
     {
         $func = function () {
