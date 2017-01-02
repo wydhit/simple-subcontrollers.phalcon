@@ -32,6 +32,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/ar') }}">不定输入参数</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/list') }}">list返回测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/strpos') }}">strpos</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/index/null') }}">null比较</a>
             </div>
             <div class="col-md-12">
                 <h3>

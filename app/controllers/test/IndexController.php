@@ -23,6 +23,18 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function nullAction()
+    {
+        $res[] = (null > 0);
+        $res[] = (null > -1);
+        $res[] = (null == 0);
+        $res[] = (null === 0);
+        $data = [null, 1, 0, -1];
+        sort($data);
+        dump($res);
+        dump($data);
+    }
+
     public function strposAction()
     {
         dump(strpos("lalalala", "l"));
