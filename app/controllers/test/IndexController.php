@@ -27,6 +27,7 @@ class IndexController extends ControllerBase
     {
         $res[] = $this->request->getHeader("PEPPERTV_UID");
         $res[] = $this->request->getHeader("PEPPERTV_TOKEN");
+        $res[] = $this->request->get();
         dump($res);
     }
 
