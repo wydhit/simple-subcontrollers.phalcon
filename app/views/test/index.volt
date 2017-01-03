@@ -34,6 +34,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/strpos') }}">strpos</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/null') }}">null比较</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/js') }}">APP js交互</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/index/cookie') }}">COOKIE测试</a>
             </div>
             <div class="col-md-12">
                 <h3>

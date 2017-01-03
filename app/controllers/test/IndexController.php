@@ -23,6 +23,24 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function cookieAction()
+    {
+        $this->cookies->set(
+            "remember-me",
+            "some value",
+            time() + 15 * 86400
+        );
+
+        // 检测cookie之前有没被设置过
+        if ($this->cookies->has("remember-me")) {
+            // 获取cookie
+            $rememberMeCookie = $this->cookies->get("remember-me");
+            // 获取cookie的值
+            $value = $rememberMeCookie->getValue();
+            dump($value);
+        }
+    }
+
     public function jsAction()
     {
         //$_SERVER["PEPPERTV_UID"] = "948";
