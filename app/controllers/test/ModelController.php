@@ -259,7 +259,7 @@ class ModelController extends ControllerBase
         $page = $this->request->get('page');
         $builder = $this->modelsManager->createBuilder()
             ->columns('id, name')
-            ->from('MyApp\Models\User')
+            ->from('MyApp\Models\Test\User')
             ->orderBy('name');
 
         $paginator = new QueryBuilder(
