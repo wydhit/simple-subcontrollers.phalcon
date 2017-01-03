@@ -25,9 +25,19 @@ class IndexController extends ControllerBase
 
     public function jsAction()
     {
+        //$_SERVER["PEPPERTV_UID"] = "948";
         $res[] = $this->request->getHeader("PEPPERTV_UID");
         $res[] = $this->request->getHeader("PEPPERTV_TOKEN");
+        $res[] = $this->request->getHeader("PEPPERTV-UID");
+        $res[] = $this->request->getHeader("PEPPERTV-TOKEN");
         $res[] = $this->request->get();
+        $res[] = $this->request->getHeader("User-Agent");
+        $res[] = $this->request->getHeader("User_Agent");
+        $res[] = $_COOKIE;
+        $res[] = $this->cookies->get("PHPSESSID")->getValue();
+//        $res[] = $this->cookies->get("PEPPERTV_UID")->getValue();
+//        $res[] = $this->cookies->get("PEPPERTV_TOKEN")->getValue();
+//        $res[] = $_SERVER;
         dump($res);
     }
 
