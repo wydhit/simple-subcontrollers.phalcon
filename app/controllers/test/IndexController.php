@@ -23,6 +23,13 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function jsAction()
+    {
+        $res[] = $this->request->getHeader("PEPPERTV_UID");
+        $res[] = $this->request->getHeader("PEPPERTV_TOKEN");
+        dump($res);
+    }
+
     public function nullAction()
     {
         $res[] = (null > 0);
