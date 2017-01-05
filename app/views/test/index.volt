@@ -35,6 +35,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/null') }}">null比较</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/js') }}">APP js交互</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/cookie') }}">COOKIE测试</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/index/strpad') }}">strpad</a>
             </div>
             <div class="col-md-12">
                 <h3>
@@ -63,6 +64,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/qiniu/index') }}">七牛流新建</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/qiniu/get') }}">七牛流获取</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/qiniu/room') }}">七牛连麦</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/api/huanxin') }}">环信</a>
             </div>
             <div class="col-md-12">
                 <h3>

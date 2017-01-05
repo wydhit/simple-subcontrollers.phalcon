@@ -23,6 +23,14 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function strpadAction()
+    {
+        $str = "1";
+        $res = str_pad($str, 3, 0, STR_PAD_LEFT);
+        dump($str);
+        dump($res);
+    }
+
     public function cookieAction()
     {
         $this->cookies->set(
