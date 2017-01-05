@@ -44,5 +44,19 @@ class ApiController extends ControllerBase
         return error('发送失败');
     }
 
+    public function huanxinAction()
+    {
+        $option = [
+            'client_id' => env('EASEMOB_ID'),
+            'client_secret' => env('EASEMOB_SECRET'),
+            'org_name' => env('EASEMOB_ORG_NAME'),
+            'app_name' => env('EASEMOB_APP_NAME'),
+        ];
+        $easemob = new \limx\tools\Easemob($option);
+//        $easemob->userAuthorizedRegister('limx2', '910123');
+        $res = $easemob->sendToUsers(['pt942', '942'], '948', ['msg' => 'lalala']);
+        dump($res);
+    }
+
 }
 
