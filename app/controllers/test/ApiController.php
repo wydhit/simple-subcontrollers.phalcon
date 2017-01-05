@@ -53,7 +53,19 @@ class ApiController extends ControllerBase
             'app_name' => env('EASEMOB_APP_NAME'),
         ];
         $easemob = new \limx\tools\Easemob($option);
-        $easemob->setTokenPath(BASE_PATH . '/storage/cache/data/huanxin');
+        $easemob->setStorageAdapter(function ($data) {
+            $file = BASE_PATH . '/storage/cache/data/huanxin2';
+            if ($data) {
+                // 存储
+                file_put_contents($file, $data);
+            } else {
+                if (file_exists($file)) {
+                    return file_get_contents($file);
+                }
+                return false;
+            }
+        });
+//        $easemob->setTokenPath(BASE_PATH . '/storage/cache/data/huanxin');
 //        $easemob->userAuthorizedRegister('limx2', '910123');
         $res = $easemob->sendToUsers(['pt982'], 'pt948', ['msg' => '环信测试']);
         dump($res);
