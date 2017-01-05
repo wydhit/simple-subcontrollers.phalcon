@@ -89,6 +89,7 @@
                     PayPal 相关
                 </h3>
                 <a type="button" class="btn btn-default" href="{{ url('test/paypal/index') }}">WEB支付</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/paypal/createPayment') }}">createPayment</a>
             </div>
         </div>
     </div>
