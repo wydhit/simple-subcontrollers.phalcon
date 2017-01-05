@@ -8,23 +8,39 @@ use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
 use Phalcon\Http\Client\Provider\Exception;
 
 class PaypalController extends ControllerBase
 {
+    private $apiContext;
 
-    public function indexAction()
+    public function initialize()
     {
-        $apiContext = new \PayPal\Rest\ApiContext(
-            new \PayPal\Auth\OAuthTokenCredential(
+        $this->apiContext = new ApiContext(
+            new OAuthTokenCredential(
                 env('PAYPAL_ID'),     // ClientID
                 env('PAYPAL_SECRET')      // ClientSecret
             )
         );
 
-        // After Step 2
+        // Step 2.1 : Between Step 2 and Step 3
+        $log_path = BASE_PATH . '/storage/log/' . date("Ymd") . '/PayPal.log';
+        $this->apiContext->setConfig(
+            [
+                'log.LogEnabled' => true,
+                'log.FileName' => $log_path,
+                'log.LogLevel' => 'DEBUG'
+            ]
+        );
+    }
+
+    public function indexAction()
+    {
         $creditCard = new \PayPal\Api\CreditCard();
         $creditCard->setType("visa")
             ->setNumber("4417119669820331")
@@ -34,19 +50,9 @@ class PaypalController extends ControllerBase
             ->setFirstName("Joe")
             ->setLastName("Shopper");
 
-        // Step 2.1 : Between Step 2 and Step 3
-        $log_path = BASE_PATH . '/storage/log/' . date("Ymd") . '/PayPal.log';
-        $apiContext->setConfig(
-            [
-                'log.LogEnabled' => true,
-                'log.FileName' => $log_path,
-                'log.LogLevel' => 'DEBUG'
-            ]
-        );
-
         // After Step 3
         try {
-            $creditCard->create($apiContext);
+            $creditCard->create($this->apiContext);
             echo $creditCard;
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
             // This will print the detailed information on the exception.
@@ -57,73 +63,75 @@ class PaypalController extends ControllerBase
 
     public function createPaymentAction()
     {
-        $apiContext = new \PayPal\Rest\ApiContext(
-            new \PayPal\Auth\OAuthTokenCredential(
-                env('PAYPAL_ID'),     // ClientID
-                env('PAYPAL_SECRET')      // ClientSecret
-            )
-        );
-
-        // Step 2.1 : Between Step 2 and Step 3
-        $log_path = BASE_PATH . '/storage/log/' . date("Ymd") . '/PayPal.log';
-        $apiContext->setConfig(
-            [
-                'log.LogEnabled' => true,
-                'log.FileName' => $log_path,
-                'log.LogLevel' => 'DEBUG'
-            ]
-        );
-
+        // Create new payer and method
         $payer = new Payer();
-        $payer->setPaymentMethod('paypal');
+        $payer->setPaymentMethod("paypal");
 
-        $item1 = new Item();
-        $item1->setName('商品名称')
-            ->setCurrency('USD')
-            ->setQuantity(1)
-            ->setSku("123123")
-            ->setPrice(1);
-        $itemList = new ItemList();
-        $itemList->setItems([$item1]);
-
-        $detail = new Details();
-        $detail->setShipping(1.2)
-            ->setTax(1.3)
-            ->setSubtotal(1);
-
+        // Set payment amount
         $amount = new Amount();
         $amount->setCurrency("USD")
-            ->setTotal(20)
-            ->setDetails($detail);
+            ->setTotal(10);
 
+        // Set transaction object
         $transaction = new Transaction();
         $transaction->setAmount($amount)
-            ->setItemList($itemList)
-            ->setDescription("描述")
-            ->setInvoiceNumber(uniqid());
+            ->setDescription("Payment description");
 
+        // Set redirect urls
         $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl("http://baidu.com")
-            ->setCancelUrl("http://baidu.com/1");
+        $redirectUrls->setReturnUrl('http://phalcon.app/test/paypal/process')
+            ->setCancelUrl('http://phalcon.app/test/paypal/cancel');
 
+        // Create the full payment object
         $payment = new Payment();
-        $payment->setIntent("sale")
+        $payment->setIntent('sale')
             ->setPayer($payer)
             ->setRedirectUrls($redirectUrls)
-            ->setTransactions([$transaction]);
+            ->setTransactions(array($transaction));
 
-        $request = clone $payment;
         try {
-            $payment->create($apiContext);
+            $payment->create($this->apiContext);
+
+            // Get PayPal redirect URL and redirect user
+            $approvalUrl = $payment->getApprovalLink();
+            $this->response->redirect($approvalUrl);
+
+            // REDIRECT USER TO $approvalUrl
+        } catch (\PayPal\Exception\PayPalConnectionException $ex) {
+            echo $ex->getCode();
+            echo $ex->getData();
+            die($ex);
         } catch (Exception $ex) {
-            ResultPrinter::printError("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex);
-            exit(1);
+            die($ex);
         }
-        $approvalUrl = $payment->getApprovalLink();
-        ResultPrinter::printResult("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $payment);
+    }
 
-        return $payment;
+    public function processAction()
+    {
+        $paymentId = $this->request->get('paymentId');
+        $payment = Payment::get($paymentId, $this->apiContext);
+        $payerId = $this->request->get('PayerID');
 
+        // Execute payment with payer id
+        $execution = new PaymentExecution();
+        $execution->setPayerId($payerId);
+
+        try {
+            // Execute payment
+            $result = $payment->execute($execution, $this->apiContext);
+            //var_dump($result);
+        } catch (\PayPal\Exception\PayPalConnectionException $ex) {
+            echo $ex->getCode();
+            echo $ex->getData();
+            die($ex);
+        } catch (Exception $ex) {
+            die($ex);
+        }
+    }
+
+    public function cancelAction()
+    {
+        echo "CANCEL";
     }
 
 }
