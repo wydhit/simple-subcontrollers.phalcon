@@ -84,6 +84,12 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/ali/sms') }}">短信接口</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/ali/login') }}">支付宝登录</a>
             </div>
+            <div class="col-md-12">
+                <h3>
+                    PayPal 相关
+                </h3>
+                <a type="button" class="btn btn-default" href="{{ url('test/paypal/index') }}">WEB支付</a>
+            </div>
         </div>
     </div>
 {% endblock %}
