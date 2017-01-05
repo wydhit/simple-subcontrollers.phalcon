@@ -53,8 +53,9 @@ class ApiController extends ControllerBase
             'app_name' => env('EASEMOB_APP_NAME'),
         ];
         $easemob = new \limx\tools\Easemob($option);
+        $easemob->setTokenPath(BASE_PATH . '/storage/cache/data/huanxin');
 //        $easemob->userAuthorizedRegister('limx2', '910123');
-        $res = $easemob->sendToUsers(['pt942', '942'], '948', ['msg' => 'lalala']);
+        $res = $easemob->sendToUsers(['pt982'], 'pt948', ['msg' => '环信测试']);
         dump($res);
     }
 
