@@ -70,7 +70,7 @@ class PaypalController extends ControllerBase
         // Set payment amount
         $amount = new Amount();
         $amount->setCurrency("USD")
-            ->setTotal(10);
+            ->setTotal(0.01);
 
         // Set transaction object
         $transaction = new Transaction();
@@ -119,6 +119,8 @@ class PaypalController extends ControllerBase
         try {
             // Execute payment
             $result = $payment->execute($execution, $this->apiContext);
+            dump($result->getState());
+            dump($result);
             //var_dump($result);
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
             echo $ex->getCode();
