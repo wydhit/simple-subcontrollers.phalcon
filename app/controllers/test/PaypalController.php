@@ -119,7 +119,9 @@ class PaypalController extends ControllerBase
         try {
             // Execute payment
             $result = $payment->execute($execution, $this->apiContext);
-            dump($result->getState());
+            if ($result->getState() == 'approved') {
+                echo "SUCCESS";
+            }
             dump($result);
             //var_dump($result);
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
