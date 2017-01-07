@@ -14,8 +14,15 @@ use Phalcon\Cli\Task;
 
 class Test1Task extends Task
 {
+    private $money = [5, 15, 50, 99, 299, 999];
+
     public function mainAction()
     {
-        echo "test1\n";
+        foreach ($this->money as $money) {
+            $mei = $money - (floatval($money) * 0.029 + 0.3);
+            $ren = $mei * 7;
+            $coin = $ren * 10;
+            echo "$" . $money . "->" . $coin . "\n";
+        }
     }
 }
