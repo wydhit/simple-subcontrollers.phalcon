@@ -36,6 +36,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/js') }}">APP js交互</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/cookie') }}">COOKIE测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/strpad') }}">strpad</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/index/arrayColumn') }}">array_column</a>
             </div>
             <div class="col-md-12">
                 <h3>

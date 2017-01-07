@@ -23,6 +23,16 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function arrayColumnAction()
+    {
+        $data = [
+            ['id' => 1], ['id' => 2], ['id' => 3]
+        ];
+        dump($data);
+        $res = array_column($data, 'id');
+        dump($res);
+    }
+
     public function strpadAction()
     {
         $str = "1";
