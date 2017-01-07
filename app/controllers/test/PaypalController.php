@@ -87,11 +87,12 @@ class PaypalController extends ControllerBase
         $payment->setIntent('sale')
             ->setPayer($payer)
             ->setRedirectUrls($redirectUrls)
-            ->setTransactions(array($transaction));
+            ->setTransactions(array($transaction))
+            ->setNoteToPayer("我是支付消息");
 
         try {
             $payment->create($this->apiContext);
-
+            logger($payment->getId());
             // Get PayPal redirect URL and redirect user
             $approvalUrl = $payment->getApprovalLink();
             $this->response->redirect($approvalUrl);
@@ -123,6 +124,8 @@ class PaypalController extends ControllerBase
                 echo "SUCCESS";
             }
             dump($result);
+            dump($result->getTransactions()[0]->getAmount()->getTotal());
+            dump($result->getId());
             //var_dump($result);
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
             echo $ex->getCode();
