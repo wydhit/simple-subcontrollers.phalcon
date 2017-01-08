@@ -11,5 +11,12 @@ class TraitsController extends \Phalcon\Mvc\Controller
         return self::success();
     }
 
+    public function dispatchAction()
+    {
+        dispatch_error(400, "不加return");
+        //return dispatch_error(401, "加return");
+        dispatch_error(402, "不加return");
+    }
+
 }
 

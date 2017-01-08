@@ -62,6 +62,7 @@
                     框架结构测试
                 </h3>
                 <a type="button" class="btn btn-default" href="{{ url('test/traits/index') }}">Trait</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/traits/dispatch') }}">Dispatch</a>
             </div>
             <div class="col-md-12">
                 <h3>
