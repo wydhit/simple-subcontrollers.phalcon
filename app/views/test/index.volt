@@ -59,6 +59,12 @@
             </div>
             <div class="col-md-12">
                 <h3>
+                    框架结构测试
+                </h3>
+                <a type="button" class="btn btn-default" href="{{ url('test/traits/index') }}">Trait</a>
+            </div>
+            <div class="col-md-12">
+                <h3>
                     第三方服务
                 </h3>
                 <a type="button" class="btn btn-default" href="{{ url('test/api/yunpian') }}">云片短信</a>
