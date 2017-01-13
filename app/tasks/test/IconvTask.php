@@ -26,6 +26,8 @@ class IconvTask extends Task
                 $res = iconv('GBK', 'UTF-8', $content);
                 if (empty($res)) {
                     $res = iconv('', 'UTF-8', $content);
+                } else if (empty($res)) {
+                    $res = $content;
                 }
                 file_put_contents("public/iconv/output/{$name[0]}", $res);
             } catch (Exception $e) {
