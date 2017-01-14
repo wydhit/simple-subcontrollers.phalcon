@@ -14,9 +14,15 @@ use Phalcon\Cli\Task;
 
 class MainTask extends Task
 {
+    public static $tasks = [
+        ['task' => 'System\\Init', 'action' => 'storage', 'params' => []]
+    ];
+
     public function mainAction()
     {
-        echo env('TEST');
+        foreach (self::$tasks as $task) {
+            $this->console->handle($task);
+        }
     }
 
 }
