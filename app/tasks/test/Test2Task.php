@@ -14,8 +14,9 @@ use Phalcon\Cli\Task;
 
 class Test2Task extends Task
 {
-    public function mainAction()
+    public function mainAction($params = [])
     {
-        echo "test2\n";
+        echo "test2" . PHP_EOL;
+        print_r($params);
     }
 }
