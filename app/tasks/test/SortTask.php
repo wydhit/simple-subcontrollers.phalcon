@@ -14,8 +14,22 @@ use Phalcon\Cli\Task;
 
 class SortTask extends Task
 {
-    const NUM = 1000;
+    const NUM = 10000;
 
+    /**
+     * [mainAction desc]
+     * @desc
+     * @author limx
+     * @result
+     * php 原生方法 sort:
+     * 0.0013320446014404
+     * php 实现的方法 冒泡排序:
+     * 2.888885974884
+     * php 实现的方法 快速排序:
+     * 1.5615661144257
+     * zephir 实现的方法 冒泡排序:
+     * 1.8319699764252
+     */
     public function mainAction()
     {
         $arr = [];
@@ -23,20 +37,26 @@ class SortTask extends Task
             $arr[] = rand(1, self::NUM);
         }
         $num = self::NUM - 1;
+
         $time = time() + microtime();
-//        sort($arr);
-//        $arr = $this->sort($arr);
+        sort($arr);
+        echo "php 原生方法 sort:", PHP_EOL;
+        echo time() + microtime() - $time, PHP_EOL;
+
+        $time = time() + microtime();
+        $arr = $this->sort($arr);
+        echo "php 实现的方法 冒泡排序:", PHP_EOL;
+        echo time() + microtime() - $time, PHP_EOL;
+
+        $time = time() + microtime();
         $this->qsort($arr, 0, $num);
-//        $arr = \Demo\Hello::sort($arr);
+        echo "php 实现的方法 快速排序:", PHP_EOL;
+        echo time() + microtime() - $time, PHP_EOL;
 
-//        $demo = new \Demo\Hello();
-//        $demo->qsortInit($arr);
-//        $demo->qsort(0, $num);
-//        $arr = $demo->output();
-
-        echo time() + microtime() - $time;
-//        echo PHP_EOL;
-//        print_r($arr);
+        $time = time() + microtime();
+        $arr = \Demo\Hello::sort($arr);
+        echo "zephir 实现的方法 冒泡排序:", PHP_EOL;
+        echo time() + microtime() - $time, PHP_EOL;
     }
 
     private function sort($arr)
