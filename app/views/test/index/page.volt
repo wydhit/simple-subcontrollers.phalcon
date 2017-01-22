@@ -13,3 +13,17 @@
         <?php } ?>
     </table>
 {% endblock %}
+{% block js %}
+    <script>
+        var json = {
+            test: "aaaa"
+        };
+        $.post('/aaa', json, function (jsonData) {
+            if (jsonData.status == 1) {
+
+            } else {
+                alert(jsonData.message);
+            }
+        }, "json")
+    </script>
+{% endblock %}
