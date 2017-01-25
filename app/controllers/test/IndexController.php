@@ -23,6 +23,12 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function assetAction()
+    {
+        $this->assets->addJs('app/js/test.js');
+        return $this->view->render('test/index', 'asset');
+    }
+
     public function arrayColumnAction()
     {
         $data = [
