@@ -38,6 +38,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/strpad') }}">strpad</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/arrayColumn') }}">array_column</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/index/asset') }}">资源管理</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/index/addQueue') }}">加入消息队列</a>
             </div>
             <div class="col-md-12">
                 <h3>

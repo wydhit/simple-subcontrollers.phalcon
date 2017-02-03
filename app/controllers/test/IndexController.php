@@ -23,6 +23,19 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function addQueueAction()
+    {
+        $config = [
+            'host' => '127.0.0.1',
+            'auth' => '',
+            'port' => '6379',
+        ];
+        $redis = LRedis::getInstance($config);
+        $time = time();
+        $redis->lpush('phalcon:test:queue', $time);
+        echo "LPUSH phalcon:test:queue ", $time;
+    }
+
     public function assetAction()
     {
         $this->assets->addJs('app/js/test.js');
