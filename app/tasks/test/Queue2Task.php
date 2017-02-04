@@ -19,8 +19,8 @@ class Queue2Task extends Task
     private $maxProcesses = 500;
     private $child = 0;
     private $close = 0;
-    private $masterRedis;
     private $redis_queue = 'phalcon:test:queue';
+    const TEST_TASK = 5000;
 
     public function mainAction()
     {
@@ -43,9 +43,18 @@ class Queue2Task extends Task
                 }
                 echo "开始任务-当前进程数：", $this->child, PHP_EOL;
                 $this->child++;
-                $process = new \swoole_process([$this, 'process']);
-                $process->write(json_encode($data_pop));
-                $pid = $process->start();
+                if ($data_pop[0] != $this->redis_queue) {
+                    // 消息队列KEY值不匹配
+                    continue;
+                }
+                if (isset($data_pop[1])) {
+                    $process = new \swoole_process([$this, 'process']);
+                    $process->write($data_pop[1]);
+                    $pid = $process->start();
+                    if ($pid === false) {
+                        $rds->lpush($this->redis_queue, $data_pop[1]);
+                    }
+                }
             } else {
                 sleep(1);
             }
@@ -55,31 +64,35 @@ class Queue2Task extends Task
     public function testAction()
     {
         $redis = $this->redis_client();
-        for ($i = 0; $i < 3000; $i++) {
+        for ($i = 0; $i < self::TEST_TASK; $i++) {
             $data = [
                 'abc' => $i,
                 'timestamp' => time() . rand(100, 999)
             ];
             $redis->lpush($this->redis_queue, json_encode($data));
         }
-//        exit;
     }
 
+    /**
+     * [process desc]
+     * @desc 子进程
+     * @author limx
+     * @param \swoole_process $worker
+     */
     public function process(\swoole_process $worker)
     {
-        // 第一个处理
-//        $GLOBALS['worker'] = $worker;
-//        swoole_event_add($worker->pipe, function ($pipe) {
-//            $worker = $GLOBALS['worker'];
-//            $recv = $worker->read();            //send data to master
-//            sleep(1);
-//            echo "数据包: ", $recv . PHP_EOL;
-//            $worker->exit(0);
-//        });
-        $recv = $worker->read();
-        sleep(1);
-        echo "数据包: ", $recv . PHP_EOL;
-        $worker->exit(0);
+        swoole_event_add($worker->pipe, function ($pipe) use ($worker) {
+            $recv = $worker->read();            //send data to master
+            sleep(1);
+            echo "数据包: ", $recv . PHP_EOL;
+            $worker->exit(0);
+            swoole_event_del($pipe);
+        });
+
+//        $recv = $worker->read();
+//        sleep(1);
+//        echo "数据包: ", $recv . PHP_EOL;
+//        $worker->exit(0);
     }
 
 
