@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------
-// | Demo [ WE CAN DO IT JUST THINK IT ]
+// | 子线程阻塞的消息队列 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
 // +----------------------------------------------------------------------
@@ -26,7 +26,7 @@ class QueueTask extends Task
         }
         $worker_num = 2;//创建的进程数
         for ($i = 0; $i < $worker_num; $i++) {
-            $process = new \swoole_process(function () {
+            $process = new \swoole_process(function ($worker) {
                 $config = [
                     'host' => '127.0.0.1',
                     'auth' => '',
