@@ -9,7 +9,7 @@
 // | Date: 2016/11/9 Time: 9:55
 // +----------------------------------------------------------------------
 use limx\func\Debug;
-use limx\phalcon\Ajax;
+use limx\phalcon\Http\Response;
 use limx\func\Arr;
 
 
@@ -32,12 +32,12 @@ if (!function_exists('success')) {
      * [success desc]
      * @desc
      * @author limx
-     * @param $data
-     * @return \limx\phalcon\JsonResponse
+     * @param array $data
+     * @return mixed
      */
     function success($data = [])
     {
-        return Ajax::success($data);
+        return Response::send(1, $data);
     }
 }
 
@@ -47,12 +47,13 @@ if (!function_exists('error')) {
      * [error desc]
      * @desc
      * @author limx
-     * @param $data
-     * @return \limx\phalcon\JsonResponse
+     * @param string $msg
+     * @param array $data
+     * @return mixed
      */
     function error($msg = '', $data = [])
     {
-        return Ajax::error($msg, $data);
+        return Response::send(0, $data, $msg);
     }
 }
 
@@ -82,6 +83,9 @@ if (!function_exists('dispatch_error')) {
      */
     function dispatch_error($code = 500, $msg = '')
     {
+        $error_msg = app(sprintf("error-code.%d", $code));
+        if (empty($msg) && !empty($error_msg)) $msg = $error_msg;
+
         $dispatcher = di('dispatcher');
         $dispatcher->forward([
             'namespace' => 'MyApp\Controllers',
