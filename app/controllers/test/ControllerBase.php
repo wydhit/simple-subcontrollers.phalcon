@@ -3,9 +3,11 @@
 namespace MyApp\Controllers\Test;
 
 use Phalcon\Mvc\Controller;
+use MyApp\Traits\System\Response;
 
 class ControllerBase extends Controller
 {
+    use Response;
     protected $settings = [];
 
     public function initialize()

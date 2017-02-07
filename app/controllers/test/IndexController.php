@@ -31,9 +31,9 @@ class IndexController extends ControllerBase
     public function pfnAjaxAction($type)
     {
         if ($type == "helper") {
-            return success(['key' => 111]);
+            return success(['key' => 'helper']);
         } else {
-            return 1;
+            return self::success(['key' => 'trait']);
         }
     }
 
