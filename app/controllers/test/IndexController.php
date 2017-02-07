@@ -23,6 +23,20 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function ajaxAction()
+    {
+        return $this->view->render('test/index', 'ajax');
+    }
+
+    public function pfnAjaxAction($type)
+    {
+        if ($type == "helper") {
+            return success(['key' => 111]);
+        } else {
+            return 1;
+        }
+    }
+
     public function addQueueAction()
     {
         $config = [
@@ -90,9 +104,9 @@ class IndexController extends ControllerBase
         $res[] = $this->request->getHeader("User_Agent");
         $res[] = $_COOKIE;
         $res[] = $this->cookies->get("PHPSESSID")->getValue();
-//        $res[] = $this->cookies->get("PEPPERTV_UID")->getValue();
-//        $res[] = $this->cookies->get("PEPPERTV_TOKEN")->getValue();
-//        $res[] = $_SERVER;
+        //        $res[] = $this->cookies->get("PEPPERTV_UID")->getValue();
+        //        $res[] = $this->cookies->get("PEPPERTV_TOKEN")->getValue();
+        //        $res[] = $_SERVER;
         dump($res);
     }
 
@@ -131,11 +145,11 @@ class IndexController extends ControllerBase
     public function arAction()
     {
         $func = function () {
-//            $count = func_num_args();
-//            for ($i = 0; $i < $count; $i++) {
-//                $param[] = func_get_arg($i);
-//            }
-//            return $param;
+            //            $count = func_num_args();
+            //            for ($i = 0; $i < $count; $i++) {
+            //                $param[] = func_get_arg($i);
+            //            }
+            //            return $param;
             return func_get_args();
         };
         $res = $func(1, 2, 3, 4, 5);
@@ -262,12 +276,12 @@ class IndexController extends ControllerBase
         dump($res);
 
         /** 也可防止注入 */
-//        $res = User::findFirst($id);
+        //        $res = User::findFirst($id);
 
         /** 字符串拼接不能有效防止注入 */
-//        $sql = 'select * from user where id=' . $id;
-//        $res = DB::query($sql);
-//        dump($res);
+        //        $sql = 'select * from user where id=' . $id;
+        //        $res = DB::query($sql);
+        //        dump($res);
     }
 
     public function wordAction()
@@ -394,15 +408,15 @@ class IndexController extends ControllerBase
         $code = '500';
         $msg = '出错了';
         return dispatch_error($code, $msg);
-//        $dispatcher = di('dispatcher');
-//        $dispatcher->forward(
-//            [
-//                'namespace' => 'MyApp\Controllers',
-//                'controller' => 'error',
-//                'action' => 'index',
-//                'params' => [$code, $msg],
-//            ]
-//        );
+        //        $dispatcher = di('dispatcher');
+        //        $dispatcher->forward(
+        //            [
+        //                'namespace' => 'MyApp\Controllers',
+        //                'controller' => 'error',
+        //                'action' => 'index',
+        //                'params' => [$code, $msg],
+        //            ]
+        //        );
     }
 
     public function indexAction()
