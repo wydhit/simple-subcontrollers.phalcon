@@ -135,7 +135,7 @@ class ModelController extends ControllerBase
         $user = User::findFirst(1);
         $user->name = time();
         $user->username = time();
-//        $user->password = time();
+        //        $user->password = time();
         $user->email = time();
         $user->role_id = 1;
         if ($user->save() === false) {
@@ -305,11 +305,33 @@ class ModelController extends ControllerBase
         $res = $mysql->query($sql, [1]);
         dump("事务内其他链接 修改：" . $res[0]['name']);
         DB::rollback();
-//        DB::commit();
+        //        DB::commit();
         $res = DB::fetch($sql, [1]);
         dump("事务结束后数据：" . $res['name']);
 
 
+    }
+
+    public function cacheAction()
+    {
+        $user = User::findFirst([
+            'conditions' => 'id=?0',
+            'bind' => 1,
+            'cache' => [
+                'key' => '[CACHE][USER][1]',
+                'lifetime' => 100,
+            ],
+        ]);
+        echo "CACHE:", $user->name, PHP_EOL;
+
+        $user->name = "李铭昕" . date("Y-m-d H:i:s");
+        $user->save();
+
+        $user = User::findFirst([
+            'conditions' => 'id=?0',
+            'bind' => 1,
+        ]);
+        echo "NOW:", $user->name, PHP_EOL;
     }
 
 }
