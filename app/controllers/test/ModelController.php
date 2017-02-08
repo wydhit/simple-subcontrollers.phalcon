@@ -318,8 +318,8 @@ class ModelController extends ControllerBase
             'conditions' => 'id=?0',
             'bind' => 1,
             'cache' => [
-                'key' => '[CACHE][USER][1]',
-                'lifetime' => 100,
+                'key' => 'CACHE:USER:1',
+                'lifetime' => 10,
             ],
         ]);
         echo "CACHE:", $user->name, PHP_EOL;
