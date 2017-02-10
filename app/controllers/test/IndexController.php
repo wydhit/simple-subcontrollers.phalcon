@@ -539,6 +539,12 @@ class IndexController extends ControllerBase
         cache('test_2', time());
         dump(cache('test_2'));
 
+        $cache = di('cache');
+        if (empty($cache->get('CACHE:TEST:1', 6))) {
+            $cache->save('CACHE:TEST:1', date("Y-m-d H:i:s"));
+        }
+        dump($cache->get('CACHE:TEST:1'));
+
     }
 
     public function urlAction()
