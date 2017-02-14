@@ -1,20 +1,16 @@
 <?php
 
-namespace MyApp\Tasks;
+namespace MyApp\Tasks\Test;
 
 use Phalcon\Cli\Task;
 
-class MainTask extends Task
+class ArrayTask extends Task
 {
-    public static $tasks = [
-        ['task' => 'System\\Init', 'action' => 'storage', 'params' => []]
-    ];
-
     public function mainAction()
     {
-        foreach (self::$tasks as $task) {
-            $this->console->handle($task);
-        }
+        $arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+        $res = array_chunk($arr, 3);
+        print_r($res);
     }
 
 }
