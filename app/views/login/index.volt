@@ -2,20 +2,19 @@
 {% block content %}
     <div class="container">
         <div class="jumbotron">
-            <h1>Welcome</h1>
-            <p>辣椒直播 - API接口测试</p>
-            <p>登录</p>
+            <h2>PHALCON - 后台管理系统</h2>
+            <p>PHALCON - 后台管理系统</p>
         </div>
         <div class="row">
             <div class="col-sm-6 col-md-4">
                 <form>
                     <div class="form-group">
-                        <label>手机号</label>
-                        <input type="text" class="form-control" id="mobile" value="{{ mobile }}" placeholder="手机号">
+                        <label>登录名</label>
+                        <input type="text" class="form-control" id="name" placeholder="登录名">
                     </div>
                     <div class="form-group">
-                        <label>验证码</label>
-                        <input type="text" class="form-control" id="code" placeholder="验证码" value="1313200">
+                        <label>密码</label>
+                        <input type="password" class="form-control" id="password" placeholder="密码">
                     </div>
                     <a onclick="sub()" class="btn btn-default">登录</a>
                 </form>
@@ -28,12 +27,12 @@
 {% block js %}
     <script>
         function sub() {
-            var mobile = $("#mobile").val();
-            var code = $("#code").val();
+            var name = $("#name").val();
+            var password = $("#password").val();
 
             var json = {
-                mobile: mobile,
-                code: code
+                name: name,
+                password: password
             };
             var url = $("#postUrl").val();
 

@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">辣椒直播 - API测试系统</a>
+            <a class="navbar-brand" href="#">PHALCON - 后台管理系统</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -19,10 +19,7 @@
                         菜单 <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('/config/index') }}">配置信息</a></li>
-                        <li><a href="{{ url('/user/index') }}">用户信息</a></li>
-                        <li><a href="{{ url('/pet/index') }}">宠物信息</a></li>
-                        <li><a href="{{ url('/broadcast/index') }}">直播信息</a></li>
+                        <li><a href="{{ url('/index/index') }}">首页</a></li>
                     </ul>
                 </li>
                 <li role="presentation" class="dropdown">

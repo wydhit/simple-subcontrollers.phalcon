@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>辣椒直播 - API测试系统</title>
+    <title>PHALCON - 后台管理系统</title>
 
     <!-- Bootstrap -->
     <link href="{{ static_url('/lib/bootstrap-3.3.7/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -26,7 +26,6 @@
             {% include "public/sideBar.volt" %}
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            {% include "public/user.volt" %}
             {% block content %}{% endblock %}
         </div>
     </div>

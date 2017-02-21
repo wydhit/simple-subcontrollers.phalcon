@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------
-// | PHALCON-PROJECT [ WE CAN DO IT JUST THINK IT ]
+// | Demo [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
 // +----------------------------------------------------------------------
@@ -18,4 +18,17 @@ class IndexController extends ControllerBase
         return $this->view->render('index', 'index');
     }
 
+    public function searchAction()
+    {
+        $key = $this->request->get('key');
+        $apis = app('api');
+        foreach ($apis as $api => $url) {
+            $res = stripos($api, $key);
+            if ($res === false) {
+                continue;
+            }
+            return $this->response->redirect($url);
+        }
+        return $this->response->redirect('/index/index');
+    }
 }
