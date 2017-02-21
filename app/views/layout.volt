@@ -19,24 +19,12 @@
     <![endif]-->
 </head>
 <body>
-{% include "public/topBar.volt" %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            {% include "public/sideBar.volt" %}
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            {% include "public/user.volt" %}
-            {% block content %}{% endblock %}
-        </div>
-    </div>
-</div>
+{% block content %}{% endblock %}
 <div id="modal"></div>
-
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ static_url('/lib/jquery-2.2.4/jquery.min.js') }}"></script>
 <script src="{{ static_url('/lib/bootstrap-3.3.7/js/bootstrap.min.js') }}"></script>
-<script src="{{ static_url('/app/js/common.js?v=1.0.3') }}"></script>
+<script src="{{ static_url('/app/js/common.js') }}"></script>
 {% block js %}{% endblock %}
 </body>
 </html>
