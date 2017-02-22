@@ -33,21 +33,3 @@ jQuery.error = function (msg, callback) {
 jQuery.setSideBar = function (index) {
     $(".nav-sidebar>li").eq(index).addClass("active");
 };
-jQuery.httpGet = function (e, callback) {
-    var url = $(e).attr('data-url');
-    var form = $(e).parent().get(0);
-    var json = {};
-    $.each(form, function (i, v) {
-        var field = $(v).attr('name');
-        var val = $(v).val();
-        json[field] = val;
-    })
-    $.post(url, json, function (jsonData) {
-        if (jsonData.status == 1) {
-            $.success("数据返回成功！");
-            callback(jsonData.data);
-        } else {
-            $.error(jsonData.message);
-        }
-    }, "json");
-};
