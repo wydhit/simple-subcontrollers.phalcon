@@ -21,7 +21,7 @@ class Queue3Task extends QueueTask
     // 当前进程数
     protected $process = 0;
     // 消息队列Redis键值
-    // protected $queueKey = 'phalcon:test:queue';
+    protected $queueKey = 'phalcon:test:queue';
     // 等待时间
     protected $waittime = 1;
 
@@ -38,7 +38,6 @@ class Queue3Task extends QueueTask
     protected function run($data)
     {
         echo Color::success($data);
-        sleep(1);
     }
 
 
