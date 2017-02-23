@@ -31,7 +31,7 @@ class Queue2Task extends Task
         // install signal handler for dead kids
         pcntl_signal(SIGCHLD, [$this, "sig_handler"]);
         set_time_limit(0);
-//        ini_set('default_socket_timeout', -1); //队列处理不超时,解决redis报错:read error on connection
+        // ini_set('default_socket_timeout', -1); //队列处理不超时,解决redis报错:read error on connection
 
         while (true) {
             echo "当前进程数:", $this->child, " SIGCHLD次数:", $this->close, PHP_EOL;
@@ -89,10 +89,10 @@ class Queue2Task extends Task
             swoole_event_del($pipe);
         });
 
-//        $recv = $worker->read();
-//        sleep(1);
-//        echo "数据包: ", $recv . PHP_EOL;
-//        $worker->exit(0);
+        // $recv = $worker->read();
+        // sleep(1);
+        // echo "数据包: ", $recv . PHP_EOL;
+        // $worker->exit(0);
     }
 
 
