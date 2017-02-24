@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Date: 2017/2/23 Time: 下午2:39
 // +----------------------------------------------------------------------
-namespace MyApp\Tasks\Test;
+namespace MyApp\Tasks\Async;
 
 use MyApp\Tasks\System\QueueTask;
 use limx\tools\LRedis;

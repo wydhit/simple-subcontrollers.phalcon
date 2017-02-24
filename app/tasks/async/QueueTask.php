@@ -9,7 +9,7 @@
 // | Date: 2017/2/3 Time: 下午8:48
 // +----------------------------------------------------------------------
 
-namespace MyApp\Tasks\Test;
+namespace MyApp\Tasks\Async;
 
 use Phalcon\Cli\Task;
 use limx\tools\LRedis;
