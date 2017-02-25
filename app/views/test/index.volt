@@ -68,6 +68,7 @@
                 </h3>
                 <a type="button" class="btn btn-default" href="{{ url('test/traits/index') }}">Trait</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/traits/dispatch') }}">Dispatch</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/swoole/websocket') }}">Swoole.Websocket</a>
             </div>
             <div class="col-md-12">
                 <h3>
