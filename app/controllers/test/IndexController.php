@@ -76,19 +76,21 @@ class IndexController extends ControllerBase
 
     public function cookieAction()
     {
-        $this->cookies->set(
-            "remember-me",
-            "some value",
-            time() + 15 * 86400
-        );
-
+        $key = "TEST";
+        $val = uniqid();
         // 检测cookie之前有没被设置过
-        if ($this->cookies->has("remember-me")) {
+        if ($this->cookies->has($key)) {
             // 获取cookie
-            $rememberMeCookie = $this->cookies->get("remember-me");
+            $rememberMeCookie = $this->cookies->get($key);
             // 获取cookie的值
             $value = $rememberMeCookie->getValue();
             dump($value);
+        } else {
+            $this->cookies->set(
+                $key,
+                $val,
+                time() + 15 * 86400
+            );
         }
     }
 
