@@ -9,7 +9,7 @@
 // | Date: 2017/2/4 Time: 上午10:00
 // +----------------------------------------------------------------------
 declare(ticks = 1);
-namespace MyApp\Tasks\Async;
+namespace MyApp\Tasks\Swoole;
 
 use Phalcon\Cli\Task;
 use limx\tools\LRedis;
