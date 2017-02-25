@@ -11,12 +11,22 @@
 namespace MyApp\Tasks\Test;
 
 use Phalcon\Cli\Task;
+use limx\phalcon\Cli\Color;
 
 class Test2Task extends Task
 {
     public function mainAction($params = [])
     {
-        echo "test2" . PHP_EOL;
-        print_r($params);
+        $money = 150000 + 200000 - 30000 - 30000;
+        $month = 24;
+        $sr = 15000 + 4000;
+        $res = 0;
+        for ($i = 0; $i < $month; $i++) {
+            $res += $sr;
+        }
+        $res = $res - $money;
+
+        echo Color::colorize($res / $month, Color::FG_LIGHT_CYAN);
     }
+
 }
