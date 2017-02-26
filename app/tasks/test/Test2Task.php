@@ -17,16 +17,13 @@ class Test2Task extends Task
 {
     public function mainAction($params = [])
     {
-        $money = 150000 + 200000 - 30000 - 30000;
-        $month = 24;
-        $sr = 15000 + 4000;
-        $res = 0;
-        for ($i = 0; $i < $month; $i++) {
-            $res += $sr;
+        $a = "0e11111111111111";
+        $b = "0e22222222222222";
+        if ($a === $b) {
+            echo Color::success("相等");
+        } else {
+            echo Color::error("不相等");
         }
-        $res = $res - $money;
-
-        echo Color::colorize($res / $month, Color::FG_LIGHT_CYAN);
     }
 
 }
