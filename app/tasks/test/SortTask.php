@@ -14,7 +14,7 @@ use Phalcon\Cli\Task;
 
 class SortTask extends Task
 {
-    const NUM = 10000;
+    const NUM = 20000;
 
     /**
      * [mainAction desc]
@@ -54,7 +54,7 @@ class SortTask extends Task
         echo time() + microtime() - $time, PHP_EOL;
 
         $time = time() + microtime();
-        $arr = \Demo\Hello::sort($arr);
+        $arr = \Ly\Test\Hello::sort($arr);
         echo "zephir 实现的方法 冒泡排序:", PHP_EOL;
         echo time() + microtime() - $time, PHP_EOL;
     }
