@@ -19,20 +19,30 @@ class ProcessTask extends Task
     public function mainAction()
     {
         pcntl_signal(SIGCHLD, [$this, "signalHandler"]);
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $process = new \swoole_process([$this, 'task']);
             $date = uniqid();
             $process->write($date);
             $process->start();
-            sleep(10);
         }
+        sleep(100);
     }
 
     public function task(\swoole_process $worker)
     {
-        $data = $worker->read();
-        echo Color::colorize($data, Color::FG_RED) . PHP_EOL;
-        $worker->exit(0);
+        // $data = $worker->read();
+        // echo Color::colorize($data, Color::FG_RED) . PHP_EOL;
+        // $worker->exit(0);
+
+        swoole_event_add($worker->pipe, function ($pipe) use ($worker) {
+            $recv = $worker->read();            //send data to master
+            sleep(1);
+            echo Color::colorize($recv, Color::FG_LIGHT_CYAN) . PHP_EOL;
+            sleep(1);
+            $worker->exit(0);
+            swoole_event_del($pipe);
+        });
+        echo Color::colorize("FINISH", COlor::FG_LIGHT_BLUE) . PHP_EOL;
     }
 
     /**
