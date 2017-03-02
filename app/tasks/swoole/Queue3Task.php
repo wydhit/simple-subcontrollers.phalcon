@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 namespace MyApp\Tasks\Swoole;
 
+use MyApp\Models\Test\User;
 use MyApp\Tasks\System\QueueTask;
 use limx\tools\LRedis;
 use limx\phalcon\Cli\Color;
@@ -37,7 +38,8 @@ class Queue3Task extends QueueTask
 
     protected function run($data)
     {
-        echo Color::success($data);
+        $user = User::findFirst(1);
+        echo Color::success($user->name);
     }
 
 
