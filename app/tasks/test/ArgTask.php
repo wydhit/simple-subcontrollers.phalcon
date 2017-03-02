@@ -24,7 +24,30 @@ class ArgTask extends Task
         echo Color::colorize('  php run Test\\\\Arg [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
 
         echo Color::head('Actions:') . PHP_EOL;
-        echo Color::colorize('  more    不定参数测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  more        不定参数测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  callfunc    传入方法测试', Color::FG_GREEN) . PHP_EOL;
+
+    }
+
+    public function callfuncAction()
+    {
+        function test($func)
+        {
+            if (is_callable($func)) {
+                $func();
+            } else {
+                echo Color::error("传入的参数不能被执行！");
+            }
+        }
+
+        test(function () {
+            echo Color::success("执行函数");
+        });
+        test('11111');
+        $func = function () {
+            echo Color::success("执行函数2");
+        };
+        test($func);
     }
 
     /**
