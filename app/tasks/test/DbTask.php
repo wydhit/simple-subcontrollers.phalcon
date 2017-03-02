@@ -12,17 +12,29 @@ namespace MyApp\Tasks\Test;
 
 use Phalcon\Cli\Task;
 use limx\phalcon\DB;
+use limx\phalcon\Cli\Color;
 
 class DbTask extends Task
 {
     public function mainAction()
     {
-        for ($i = 0; $i < 10000; $i++) {
-            $start = rand(1, 5);
-            $end = rand(5, 10);
-            $this->test($start, $end);
+        // for ($i = 0; $i < 10000; $i++) {
+        //     $start = rand(1, 5);
+        //     $end = rand(5, 10);
+        //     $this->test($start, $end);
+        // }
+        // echo "FINISH\n";
+
+        $sql = "UPDATE book SET name=? WHERE id = ?";
+        // $res = DB::execute($sql, [111, 1], true);
+        $res = DB::execute($sql, [11, 1]);
+        if ($res === false) {
+            echo Color::colorize("FALSE", Color::FG_LIGHT_RED) . PHP_EOL;
+        } else if ($res === true) {
+            echo Color::colorize("TRUE", Color::FG_LIGHT_CYAN) . PHP_EOL;
+        } else {
+            echo Color::colorize($res, Color::FG_LIGHT_CYAN) . PHP_EOL;
         }
-        echo "FINISH\n";
     }
 
     public function test($start, $end)
