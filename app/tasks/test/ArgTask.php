@@ -25,10 +25,14 @@ class ArgTask extends Task
 
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  more        不定参数测试', Color::FG_GREEN) . PHP_EOL;
-        echo Color::colorize('  callfunc    传入方法测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  callfunc    传入函数测试', Color::FG_GREEN) . PHP_EOL;
 
     }
 
+    /**
+     * @desc 传入函数测试
+     * @author limx
+     */
     public function callfuncAction()
     {
         function test($func)
