@@ -27,7 +27,9 @@ class DbTask extends Task
 
         $sql = "UPDATE book SET name=? WHERE id = ?";
         // $res = DB::execute($sql, [111, 1], true);
-        $res = DB::execute($sql, [11, 1]);
+        // $res = DB::execute($sql, [11, 1]);
+        $res = DB::execWithRowCount($sql, [111, 1]);
+
         if ($res === false) {
             echo Color::colorize("FALSE", Color::FG_LIGHT_RED) . PHP_EOL;
         } else if ($res === true) {
