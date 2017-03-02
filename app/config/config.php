@@ -27,7 +27,7 @@ return new Config(
         | This value is version for this project.
         |
         */
-        'version' => '1.5.10',
+        'version' => '1.5.13',
 
         /*
         |--------------------------------------------------------------------------
@@ -207,12 +207,20 @@ return new Config(
         |
         */
         'services' => [
-            'system/session.php',
-            'system/cache.php',
-            'system/log.php',
-            'system/error.php',
-            'system/cookies.php',
-            'system/crypt.php',
+            'mvc' => [
+                'system/session.php',
+                'system/cache.php',
+                'system/log.php',
+                'system/error.php',
+                'system/cookies.php',
+                'system/crypt.php',
+            ],
+            'cli' => [
+                'system/cache.php',
+                'system/log.php',
+                'system/error.php',
+                'system/crypt.php',
+            ],
         ],
 
     ]
