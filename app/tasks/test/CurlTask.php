@@ -29,7 +29,62 @@ class CurlTask extends Task
         echo Color::colorize('  postUrl     [...$1]     POST http_build_query方法', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  postJson    [...$1]     POST json方法', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  postSsl     [...$1]     POST 携带ssl方法', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  postHttps   [...$1]     POST Https', Color::FG_GREEN) . PHP_EOL;
 
+    }
+
+    public function postHttpsAction($params)
+    {
+        $res = [];
+        foreach ($params as $i => $param) {
+            $res['key' . $i] = $param;
+        }
+        $body = http_build_query($res);
+        $url = "https://demo.phalcon.lmx0536.cn/test/api/api";
+        $ch = curl_init();
+        // 设置抓取的url
+        curl_setopt($ch, CURLOPT_URL, $url);
+        // 启用时会将头文件的信息作为数据流输出。
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        // 启用时将获取的信息以文件流的形式返回，而不是直接输出。
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // 启用时会将服务器服务器返回的"Location: "放在header中递归的返回给服务器，使用CURLOPT_MAXREDIRS可以限定递归返回的数量。
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+
+        // 设置访问 方法
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        // 设置POST BODY
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+
+        // 是否检测服务器的证书是否由正规浏览器认证过的授权CA颁发的
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // 是否检测服务器的域名与证书上的是否一致
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        // 设置SSL私钥加密类型
+        curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
+        // 设置SSL私钥文件名
+        curl_setopt($ch, CURLOPT_SSLKEY, BASE_PATH . '/data/ssl/client.key');
+        // 设置SSL私钥加密类型
+        curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
+        // 设置一个包含PEM格式证书的文件名
+        curl_setopt($ch, CURLOPT_SSLCERT, BASE_PATH . '/data/ssl/client.crt');
+
+        // 设置header
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'APPID:' . uniqid(),
+            'APPSECRET:' . md5(uniqid()),
+        ]);
+
+        //执行命令
+        $result = curl_exec($ch);
+        if ($result === false) {
+            echo 'Curl error: ' . curl_error($ch);
+            return false;
+        }
+        //关闭URL请求
+        curl_close($ch);
+        $res = json_decode($result, true);
+        print_r($res);
     }
 
     public function postSslAction($params)
