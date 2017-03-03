@@ -27,8 +27,29 @@ class MathTask extends Task
         echo Color::colorize('  floor [...$1]      取整测试', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  fmod  [$1] [$2]    浮点数除法取余测试', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  max   [...$1]      取最大值', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  rand               mt_rand 与 rand取随机数', Color::FG_GREEN) . PHP_EOL;
+    }
 
+    public function randAction()
+    {
+        echo Color::head("mt_rand与rand生成随机数的速度比较") . PHP_EOL;
+        $btime = microtime(true);
+        for ($i = 0; $i < 10000000; $i++) {
+            $val = rand();
+        }
+        $etime = microtime(true);
+        $randTime = $etime - $btime;
 
+        $btime = microtime(true);
+        for ($i = 0; $i < 10000000; $i++) {
+            $val = mt_rand();
+        }
+        $etime = microtime(true);
+        $mtrandTime = $etime - $btime;
+        $method = $randTime > $mtrandTime ? "mt_rand" : "rand";
+        echo Color::colorize(sprintf("  rand    耗时  %f", $randTime)) . PHP_EOL;
+        echo Color::colorize(sprintf("  mt_rand 耗时  %f", $mtrandTime)) . PHP_EOL;
+        echo Color::colorize(sprintf("  结论：%s速度更快！", $method), Color::FG_LIGHT_GREEN) . PHP_EOL;
     }
 
     public function maxAction($params)
