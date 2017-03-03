@@ -24,7 +24,20 @@ class MathTask extends Task
         echo Color::colorize('  php run Test\\\\Math [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
 
         echo Color::head('Actions:') . PHP_EOL;
-        echo Color::colorize('  floor [num]     取整测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  floor [$1]      取整测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  fmod  [$1] [$2] 浮点数除法取余测试', Color::FG_GREEN) . PHP_EOL;
+
+    }
+
+    public function fmodAction($params)
+    {
+        if (count($params) < 2) {
+            echo Color::error("请输入除数与被除数！！");
+            return;
+        }
+        list($a, $b) = $params;
+        echo Color::colorize("运算式为fmod({$a},{$b})=", Color::FG_LIGHT_RED);
+        echo Color::colorize("  " . fmod($a, $b), Color::FG_LIGHT_GREEN) . PHP_EOL;
     }
 
     public function floorAction($params)
