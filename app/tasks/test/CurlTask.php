@@ -24,14 +24,18 @@ class CurlTask extends Task
         echo Color::colorize('  php run Test\\\\Curl [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
 
         echo Color::head('Actions:') . PHP_EOL;
-        echo Color::colorize('  get     get方法样例 - 获取百度首页页面', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  get [--error]   get方法样例 - 获取百度首页页面', Color::FG_GREEN) . PHP_EOL;
     }
 
-    public function getAction()
+    public function getAction($parrams)
     {
+        $url = "http://www.baidu.com";
+        if (count($parrams) > 0 && $parrams[0] == '--error') {
+            $url = "http://www.baidu.com1";
+        }
         $ch = curl_init();
         // 设置抓取的url
-        curl_setopt($ch, CURLOPT_URL, 'http://www.baidu.com');
+        curl_setopt($ch, CURLOPT_URL, $url);
         // 启用时会将头文件的信息作为数据流输出。
         curl_setopt($ch, CURLOPT_HEADER, false);
         // 启用时将获取的信息以文件流的形式返回，而不是直接输出。
