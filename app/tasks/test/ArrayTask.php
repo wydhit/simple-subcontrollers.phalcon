@@ -20,7 +20,19 @@ class ArrayTask extends Task
         echo Color::colorize('  case    [upper|lower]   修改键名为全大写或小写', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  combine                 拼接key数组和val数组', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  count                   统计数组中所有的值出现的次数', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  diff                    计算数组差集', Color::FG_GREEN) . PHP_EOL;
 
+    }
+
+    public function diffAction()
+    {
+        $arr1 = [1, 2, 3, '4' => 4, '5' => 5];
+        $arr2 = [2, 3, '5' => 5, '6' => 5];
+        echo Color::head("原数组：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr1), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::colorize(json_encode($arr2), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("结果：") . PHP_EOL;
+        echo Color::colorize(json_encode(array_diff($arr1, $arr2)), Color::FG_LIGHT_GREEN) . PHP_EOL;
     }
 
     public function countAction()
