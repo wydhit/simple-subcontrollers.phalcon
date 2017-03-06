@@ -21,7 +21,38 @@ class ArrayTask extends Task
         echo Color::colorize('  combine                 拼接key数组和val数组', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  count                   统计数组中所有的值出现的次数', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  diff                    计算数组差集', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  fill                    用给定的值填充数组', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  filter                  用回调函数过滤数组中的单元', Color::FG_GREEN) . PHP_EOL;
 
+    }
+
+    public function filterAction()
+    {
+        $arr = [1, 2, 3, 'a' => 4, 5, 6, 7, 'b' => 9, 8, 10];
+        echo Color::head("原数组：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("结果：") . PHP_EOL;
+        echo Color::colorize(json_encode(array_filter($arr, function ($var) {
+                return ($var & 1);
+            })), Color::FG_LIGHT_GREEN) . PHP_EOL;
+
+    }
+
+    public function fillAction($params)
+    {
+        if (count($params) < 3) {
+            echo Color::error("请输入起始值和长度和值。");
+            return false;
+        }
+        $begin = $params[0];
+        $len = $params[1];
+        $val = $params[2];
+        if (!is_numeric($begin) || !is_numeric(($len))) {
+            echo Color::error("起始值和长度必须为INT。");
+            return false;
+        }
+        $res = array_fill($begin, $len, $val);
+        echo Color::colorize(json_encode($res), Color::FG_LIGHT_GREEN) . PHP_EOL;
     }
 
     public function diffAction()
