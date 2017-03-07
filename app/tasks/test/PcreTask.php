@@ -30,10 +30,10 @@ class PcreTask extends Task
     public function matchAction()
     {
         $str = "com.peppertv.rmb6";
-        preg_match("/rmb([0-9]+)$/", $str, $rmb);
+        preg_match("/rmb[0-9]+$/", $str, $rmb);
         echo Color::head("原字符串：") . PHP_EOL;
         echo Color::colorize("  " . $str, Color::FG_LIGHT_GREEN) . PHP_EOL;
         echo Color::head("结果：") . PHP_EOL;
-        echo Color::colorize($rmb[1], Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::colorize($rmb[0], Color::FG_LIGHT_GREEN) . PHP_EOL;
     }
 }
