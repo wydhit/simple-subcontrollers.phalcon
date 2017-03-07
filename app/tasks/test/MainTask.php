@@ -23,7 +23,13 @@ class MainTask extends Task
         echo Color::head('Usage:') . PHP_EOL;
         echo Color::colorize('  php run Test\\\\[task]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
         echo Color::head('Tasks:') . PHP_EOL;
-        echo Color::colorize('  Arg                   php函数参数相关测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  Arg                     php函数参数相关测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  Array                   array函数相关测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  Bitwise                 位运算相关测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  Curl                    Curl函数相关测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  OAuth                   OAuth函数相关测试', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  Ymal                    Ymal函数相关测试', Color::FG_GREEN) . PHP_EOL;
+
 
     }
 
