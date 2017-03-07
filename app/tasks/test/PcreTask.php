@@ -26,6 +26,31 @@ class PcreTask extends Task
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  match       正则匹配', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  quote       转移正则表达式', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  replace     执行一个正则表达式的搜索和替换', Color::FG_GREEN) . PHP_EOL;
+    }
+
+    public function replaceAction()
+    {
+        $str = "http://demo.phalcon.lmx0536.cn/test/api/api";
+        $preg = "/^(http)(.*\/)(\w+)$/";
+        echo Color::head("原字符串：") . PHP_EOL;
+        echo Color::colorize("  " . $str, Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("正则替换后：") . PHP_EOL;
+        echo Color::colorize(preg_replace($preg, 'https${2}${3}/test', $str), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo PHP_EOL;
+        echo Color::head("原字符串：") . PHP_EOL;
+        echo Color::colorize("  " . $str, Color::FG_LIGHT_GREEN) . PHP_EOL;
+        $preg = [
+            '/demo/',
+            '/\d+/',
+        ];
+        $replace = [
+            'demos',
+            'limx',
+        ];
+        echo Color::head("正则替换后：") . PHP_EOL;
+        echo Color::colorize(preg_replace($preg, $replace, $str), Color::FG_LIGHT_GREEN) . PHP_EOL;
+
     }
 
     public function quoteAction()
@@ -35,7 +60,6 @@ class PcreTask extends Task
         echo Color::colorize("  " . $str, Color::FG_LIGHT_GREEN) . PHP_EOL;
         echo Color::head("转义后：") . PHP_EOL;
         echo Color::colorize(preg_quote($str, '/'), Color::FG_LIGHT_GREEN) . PHP_EOL;
-
     }
 
     public function matchAction()
