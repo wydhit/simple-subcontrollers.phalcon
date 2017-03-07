@@ -25,6 +25,17 @@ class PcreTask extends Task
 
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  match       正则匹配', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  quote       转移正则表达式', Color::FG_GREEN) . PHP_EOL;
+    }
+
+    public function quoteAction()
+    {
+        $str = "http://sss\nfz$";
+        echo Color::head("原字符串：") . PHP_EOL;
+        echo Color::colorize("  " . $str, Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("转义后：") . PHP_EOL;
+        echo Color::colorize(preg_quote($str, '/'), Color::FG_LIGHT_GREEN) . PHP_EOL;
+
     }
 
     public function matchAction()
