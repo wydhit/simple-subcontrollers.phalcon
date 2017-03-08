@@ -14,11 +14,12 @@ use MyApp\Models\Test\User;
 use MyApp\Tasks\System\QueueTask;
 use limx\tools\LRedis;
 use limx\phalcon\Cli\Color;
+use limx\phalcon\DB;
 
 class Queue3Task extends QueueTask
 {
     // 最大进程数
-    protected $maxProcesses = 500;
+    protected $maxProcesses = 10;
     // 当前进程数
     protected $process = 0;
     // 消息队列Redis键值
@@ -39,6 +40,11 @@ class Queue3Task extends QueueTask
     protected function run($data)
     {
         $user = User::findFirst(1);
+        $sql = "UPDATE `user` SET name=? WHERE id=?";
+        DB::begin();
+        DB::execute($sql, [time(), 1]);
+        DB::commit();
+        sleep(1);
         echo Color::success($user->name);
     }
 
