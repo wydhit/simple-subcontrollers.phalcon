@@ -23,7 +23,73 @@ class ArrayTask extends Task
         echo Color::colorize('  diff                    计算数组差集', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  fill                    用给定的值填充数组', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  filter                  用回调函数过滤数组中的单元', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  intersect               返回arr1中包含arr2中值的数组', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  keys                    返回数组的key值', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  map                     返回callback处理之后的数组', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  mergeRecursive          合并多个数组，键值相同则合并成一个数组', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  pad     [:len] [:val]   根据指定长度填充数组', Color::FG_GREEN) . PHP_EOL;
 
+    }
+
+    public function padAction($params)
+    {
+        if (count($params) < 2) {
+            echo Color::error("请输入数组长度 与 填充值！");
+            return;
+        }
+
+        $arr = [1, 2, 3, 4, 5];
+        echo Color::head("原数组：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("结果：") . PHP_EOL;
+        $res = array_pad($arr, $params[0], $params[1]);
+        echo Color::colorize(json_encode($res), Color::FG_LIGHT_GREEN) . PHP_EOL;
+    }
+
+    public function mergeRecursiveAction()
+    {
+        $arr1 = ["color" => ["favorite" => "red"], 5];
+        $arr2 = [10, "color" => ["favorite" => "green", "blue"]];
+        echo Color::head("原数组1：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr1), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("原数组2：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr2), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("结果：") . PHP_EOL;
+        $res = array_merge_recursive($arr1, $arr2);
+        echo Color::colorize(json_encode($res), Color::FG_LIGHT_GREEN) . PHP_EOL;
+    }
+
+    public function mapAction()
+    {
+        $arr = [1, 2, 3, 4, 5];
+        echo Color::head("原数组：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("结果：") . PHP_EOL;
+        $res = array_map(function ($n) {
+            return $n * $n;
+        }, $arr);
+        echo Color::colorize(json_encode($res), Color::FG_LIGHT_GREEN) . PHP_EOL;
+    }
+
+    public function keysAction()
+    {
+        $arr = array("a" => "green", "red", "blue", "b" => "green", 22 => "yellow", "red");
+        echo Color::head("原数组1：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("结果：") . PHP_EOL;
+        echo Color::colorize(json_encode(array_keys($arr)), Color::FG_LIGHT_GREEN) . PHP_EOL;
+    }
+
+    public function intersectAction()
+    {
+        $arr1 = array("a" => "green", "red", "blue");
+        $arr2 = array("b" => "green", "yellow", "red");
+        echo Color::head("原数组1：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr1), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("原数组2：") . PHP_EOL;
+        echo Color::colorize(json_encode($arr2), Color::FG_LIGHT_GREEN) . PHP_EOL;
+        echo Color::head("结果：") . PHP_EOL;
+        echo Color::colorize(json_encode(array_intersect($arr1, $arr2)), Color::FG_LIGHT_GREEN) . PHP_EOL;
     }
 
     public function filterAction()
