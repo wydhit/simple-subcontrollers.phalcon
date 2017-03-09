@@ -23,6 +23,11 @@ class IndexController extends ControllerBase
         echo phpinfo();
     }
 
+    public function socketAction()
+    {
+        return $this->view->render('test/index', 'socket.io');
+    }
+
     public function ajaxAction()
     {
         return $this->view->render('test/index', 'ajax');
