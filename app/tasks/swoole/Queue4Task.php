@@ -14,9 +14,9 @@ use MyApp\Models\Test\User;
 use MyApp\Tasks\System\QueueTask;
 use limx\tools\LRedis;
 use limx\phalcon\Cli\Color;
-use limx\phalcon\DB;
+use limx\tools\MyPDO;
 
-class Queue3Task extends QueueTask
+class Queue4Task extends QueueTask
 {
     // 最大进程数
     protected $maxProcesses = 10;
@@ -37,15 +37,27 @@ class Queue3Task extends QueueTask
         return LRedis::getInstance($config);
     }
 
+    protected function rewrite($data)
+    {
+        $db = MyPDO::getInstance([
+            'host' => '127.0.0.1',
+            'dbname' => 'phalcon',
+            'user' => 'root',
+            'pwd' => '910123',
+        ]);
+        $res = $db->fetch("SELECT * FROM user WHERE id = ?", [1]);
+        return json_encode($res);
+    }
+
     protected function run($data)
     {
-        $user = User::findFirst(1);
+        //$user = User::findFirst(1);
         // $sql = "UPDATE `user` SET name=? WHERE id=?";
         // DB::begin();
         // DB::execute($sql, [time(), 1]);
         // DB::commit();
         // sleep(1);
-        echo Color::success($user->name);
+        echo Color::success($data);
     }
 
 
