@@ -66,13 +66,14 @@ class CompareTask extends Task
             [1, '1'],
             ['1', '1'],
             ['0e11111111', '0e22222'],
-            ['111111111111111111111111a', '111111111111111111111111b'],
+            ['1111111111111111111111110', '111111111111111111111111b'],
             ['0111', '111'],
             [0777, '777'],
             [0777, 777],
             [0, 'a'],
             [0, null],
             ['a', null],
+            [1, 'a'],
             [0, '0'],
         ];
         foreach ($data as $item) {
@@ -88,14 +89,14 @@ class CompareTask extends Task
                 echo Color::colorize($str, Color::FG_LIGHT_GREEN) . PHP_EOL;
             } else {
                 $str = sprintf("%s==%s  不成功", $item[0], $item[1]);
-                echo Color::colorize($str, Color::FG_LIGHT_GREEN) . PHP_EOL;
+                echo Color::colorize($str, Color::FG_LIGHT_RED) . PHP_EOL;
             }
             if ($item[0] === $item[1]) {
                 $str = sprintf("%s===%s  成功", $item[0], $item[1]);
                 echo Color::colorize($str, Color::FG_LIGHT_GREEN) . PHP_EOL;
             } else {
                 $str = sprintf("%s===%s  不成功", $item[0], $item[1]);
-                echo Color::colorize($str, Color::FG_LIGHT_GREEN) . PHP_EOL;
+                echo Color::colorize($str, Color::FG_LIGHT_RED) . PHP_EOL;
             }
             echo PHP_EOL;
         }
