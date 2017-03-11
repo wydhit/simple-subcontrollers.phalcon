@@ -27,6 +27,59 @@ class CompareTask extends Task
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  compare             一部分数据==与===测试', Color::FG_GREEN) . PHP_EOL;
         echo Color::colorize('  null                null 和 0之间的比较', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  int                 int 和 string之间的比较', Color::FG_GREEN) . PHP_EOL;
+    }
+
+    public function intAction()
+    {
+        echo Color::head("1=='1'") . PHP_EOL;
+        if (1 == '1') {
+            echo Color::colorize("  结果：成立", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        } else {
+            echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
+        }
+
+        echo Color::head("0=='a123'") . PHP_EOL;
+        if (0 == 'a123') {
+            echo Color::colorize("  结果：成立", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        } else {
+            echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
+        }
+
+        echo Color::head("0=='123a'") . PHP_EOL;
+        if (0 == '123a') {
+            echo Color::colorize("  结果：成立", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        } else {
+            echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
+        }
+
+        echo Color::head("123=='123a'") . PHP_EOL;
+        if (123 == '123a') {
+            echo Color::colorize("  结果：成立", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        } else {
+            echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
+        }
+
+        echo Color::head("0===intval('b1')") . PHP_EOL;
+        if (0 === intval('b1')) {
+            echo Color::colorize("  结果：成立", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        } else {
+            echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
+        }
+
+        echo Color::head("0===intval('a')") . PHP_EOL;
+        if (0 === intval('a')) {
+            echo Color::colorize("  结果：成立", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        } else {
+            echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
+        }
+
+        echo Color::head("0=='0'") . PHP_EOL;
+        if (0 == '0') {
+            echo Color::colorize("  结果：成立", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        } else {
+            echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
+        }
     }
 
     public function nullAction()
