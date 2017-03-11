@@ -44,6 +44,20 @@ class CompareTask extends Task
         } else {
             echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
         }
+
+        echo Color::head("null==false") . PHP_EOL;
+        if (null == false) {
+            echo Color::colorize("  结果：成立", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        } else {
+            echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
+        }
+
+        echo Color::head("null==[]") . PHP_EOL;
+        if (null == []) {
+            echo Color::colorize("  结果：成立", Color::FG_LIGHT_GREEN) . PHP_EOL;
+        } else {
+            echo Color::colorize("  结果：不成立", Color::FG_LIGHT_RED) . PHP_EOL;
+        }
     }
 
     public function compareAction()
