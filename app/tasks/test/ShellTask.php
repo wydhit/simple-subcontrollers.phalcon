@@ -33,11 +33,16 @@ class ShellTask extends Task
             echo Color::error('The swoole extension is not installed');
             return;
         }
+        $this->shell();
         $id = swoole_timer_tick(1000 * 60, function () {
-            $str = "composer create-project --prefer-dist limingxinleo/phalcon-project storage/cache/data/test";
-            $shell = $str . uniqid();
-            system($shell);
-
+            $this->shell();
         });
+    }
+
+    private function shell()
+    {
+        $str = "composer create-project --prefer-dist limingxinleo/phalcon-project storage/cache/data/test";
+        $shell = $str . uniqid();
+        system($shell);
     }
 }
