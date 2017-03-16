@@ -17,13 +17,7 @@ class Test2Task extends Task
 {
     public function mainAction($params = [])
     {
-        $a = "0e11111111111111";
-        $b = "0e22222222222222";
-        if ($a === $b) {
-            echo Color::success("相等");
-        } else {
-            echo Color::error("不相等");
-        }
+        echo strtoupper(substr(PHP_OS, 0, 3));
     }
 
 }
