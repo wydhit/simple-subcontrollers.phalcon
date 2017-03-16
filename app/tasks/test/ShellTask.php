@@ -24,13 +24,17 @@ class ShellTask extends Task
         echo Color::colorize('  php run Test\\\\Shell [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
 
         echo Color::head('Actions:') . PHP_EOL;
-        echo Color::colorize('  download            循环下载phalcon-project', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  download    $num        循环下载phalcon-project', Color::FG_GREEN) . PHP_EOL;
     }
 
-    public function downloadAction()
+    public function downloadAction($params)
     {
+        $num = 10;
+        if (count($params) > 0) {
+            $num = intval($params[0]);
+        }
         $str = "composer create-project --prefer-dist limingxinleo/phalcon-project demo";
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < $num; $i++) {
             $shell = $str . uniqid();
             system($shell);
         }
