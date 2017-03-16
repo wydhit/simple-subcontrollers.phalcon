@@ -17,6 +17,8 @@ use swoole_websocket_server;
 
 class WebSocketTask extends WebSocket
 {
+    protected $port = 9501;
+
     protected function connect(swoole_websocket_server $server, $request)
     {
         echo "server: handshake success with fd{$request->fd}\n";
