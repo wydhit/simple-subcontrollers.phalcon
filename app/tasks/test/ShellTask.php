@@ -34,7 +34,7 @@ class ShellTask extends Task
             return;
         }
         $id = swoole_timer_tick(1000 * 60, function () {
-            $str = "composer create-project --prefer-dist limingxinleo/phalcon-project demo";
+            $str = "composer create-project --prefer-dist limingxinleo/phalcon-project storage/cache/data/test";
             $shell = $str . uniqid();
             system($shell);
 
