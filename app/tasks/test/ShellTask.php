@@ -24,19 +24,20 @@ class ShellTask extends Task
         echo Color::colorize('  php run Test\\\\Shell [action]', Color::FG_GREEN) . PHP_EOL . PHP_EOL;
 
         echo Color::head('Actions:') . PHP_EOL;
-        echo Color::colorize('  download    $num        循环下载phalcon-project', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  download            循环下载phalcon-project', Color::FG_GREEN) . PHP_EOL;
     }
 
-    public function downloadAction($params)
+    public function downloadAction()
     {
-        $num = 10;
-        if (count($params) > 0) {
-            $num = intval($params[0]);
+        if (!extension_loaded('swoole')) {
+            echo Color::error('The swoole extension is not installed');
+            return;
         }
-        $str = "composer create-project --prefer-dist limingxinleo/phalcon-project demo";
-        for ($i = 0; $i < $num; $i++) {
+        $id = swoole_timer_tick(1000 * 60, function () {
+            $str = "composer create-project --prefer-dist limingxinleo/phalcon-project demo";
             $shell = $str . uniqid();
             system($shell);
-        }
+
+        });
     }
 }
