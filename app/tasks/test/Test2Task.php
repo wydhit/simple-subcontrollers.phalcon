@@ -12,11 +12,13 @@ namespace MyApp\Tasks\Test;
 
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
+use limx\phalcon\Utils\Str;
 
 class Test2Task extends Task
 {
     public function mainAction($params = [])
     {
+        echo Str::random(12) . PHP_EOL;
         echo strtoupper(substr(PHP_OS, 0, 3));
     }
 
