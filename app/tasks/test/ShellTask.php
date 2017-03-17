@@ -34,7 +34,7 @@ class ShellTask extends Task
             return;
         }
         $this->shell();
-        $id = swoole_timer_tick(1000 * 60, function () {
+        $id = swoole_timer_tick(1000 * 60 * 60, function () {
             $this->shell();
         });
     }
