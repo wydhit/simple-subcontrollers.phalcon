@@ -4,9 +4,9 @@
 ### Added
 
 ### Changed
-* app/listeners/system/DbListener.php 修改TIMEOUT的变量获取方式
-* app/tasks/system/InitTask.php 修改TIMEOUT的变量获取方式
-* app/tasks/system/ClearTask.php 修改self::rm内一处逻辑运算符
+* 修改部分语法规范
+* 修改项目根目录BASE_PATH为ROOT_PATH
+* 修改单元测试目录为TESTS_PATH
 ### Fixed
 
 ## [1.6.10]
