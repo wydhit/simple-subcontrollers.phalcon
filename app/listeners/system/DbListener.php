@@ -29,7 +29,9 @@ class DbListener
     {
         $config = di('config');
         $dir = $config->application->logDir . date('Ymd');
-        if (!is_dir($dir)) mkdir($dir, 0777, true);
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
         $this->_profiler = new Profiler();
         $this->_logger = new FileLogger($dir . "/db.log");
     }
@@ -60,7 +62,7 @@ class DbListener
     }
 
     /**
-     * @desc 记录sql执行日志
+     * @desc   记录sql执行日志
      * @author limx
      */
     public function logSql()
@@ -77,7 +79,7 @@ class DbListener
         $str .= "开始时间: " . $begintime . PHP_EOL;
         $str .= "结束时间: " . $endtime . PHP_EOL;
         $str .= "执行时间: " . $runtime . PHP_EOL;
-        if ($runtime > self::TIMEOUT) {
+        if ($runtime > static::TIMEOUT) {
             $this->_logger->log($str, Logger::WARNING);
         } else {
             $this->_logger->log($str, Logger::INFO);

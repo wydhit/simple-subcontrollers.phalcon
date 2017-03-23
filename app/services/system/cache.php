@@ -22,14 +22,6 @@ if ($config->cache->type !== false) {
     );
     $cache = null;
     switch (strtolower($config->cache->type)) {
-        case 'file':
-            $cache = new BackFile(
-                $frontCache,
-                [
-                    "cacheDir" => $config->application->cacheDir . 'data/',
-                ]
-            );
-            break;
         case 'memcached':
             $cache = new BackMemCached(
                 $frontCache,
@@ -41,22 +33,30 @@ if ($config->cache->type !== false) {
                 ]
             );
             break;
+
         case 'redis':
             $cache = new BackRedis(
                 $frontCache,
                 [
-                    'host' => $redis->host,
-                    'port' => $redis->port,
-                    'auth' => $redis->auth,
-                    'persistent' => $redis->persistent,
-                    'index' => $redis->index,
-                    'prefix' => ':cache:',
+                    'host' => $config->redis->host,
+                    'port' => $config->redis->port,
+                    'auth' => $config->redis->auth,
+                    'persistent' => $config->redis->persistent,
+                    'index' => $config->redis->index,
+                    'prefix' => 'cache:',
                     'statsKey' => '_PHCM',
                 ]
             );
             break;
+
+        case 'file':
         default:
-            exit('Sorry! The cache engine is not support!');
+            $cache = new BackFile(
+                $frontCache,
+                [
+                    "cacheDir" => $config->application->cacheDir . 'data/',
+                ]
+            );
             break;
     }
     if ($cache !== null) {
