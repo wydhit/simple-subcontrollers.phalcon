@@ -9,7 +9,7 @@
         <meta name="author" content="Vincent Garreau"/>
         <meta name="viewport"
               content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" media="screen" href="css/style.css">
+        <link rel="stylesheet" media="screen" href="{{ static_url('/lib/particles.js-2.0.0/demo/css/style.css') }}">
     </head>
     <body>
 
@@ -21,12 +21,16 @@
     <!-- particles.js container -->
     <div id="particles-js"></div>
 
+    </body>
+    </html>
+{% endblock %}
+{% block js %}
     <!-- scripts -->
-    <script src="../particles.js"></script>
-    <script src="js/app.js"></script>
+    <script src="{{ static_url('/lib/particles.js-2.0.0/particles.js') }}"></script>
+    <script src="{{ static_url('/lib/particles.js-2.0.0/demo/js/app.js') }}"></script>
 
     <!-- stats.js -->
-    <script src="js/lib/stats.js"></script>
+    <script src="{{ static_url('/lib/particles.js-2.0.0/demo/js/lib/stats.js') }}"></script>
     <script>
         var count_particles, stats, update;
         stats = new Stats;
@@ -45,13 +49,5 @@
             requestAnimationFrame(update);
         };
         requestAnimationFrame(update);
-    </script>
-
-    </body>
-    </html>
-{% endblock %}
-{% block js %}
-    <script>
-
     </script>
 {% endblock %}
