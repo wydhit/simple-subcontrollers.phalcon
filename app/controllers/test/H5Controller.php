@@ -12,5 +12,10 @@ class H5Controller extends ControllerBase
 
     }
 
+    public function particlesAction()
+    {
+        return $this->view->render('test/h5', 'particles');
+    }
+
 }
 
