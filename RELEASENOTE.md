@@ -2,12 +2,22 @@
 
 ## [Unreleased]
 ### Added
+* 增加Logics逻辑层
+* 增加用于json返回的error控制器方法
 
+### Changed
+* 扩展Response返回，自定义错误码
+
+### Fixed
+
+## [1.6.14]
 ### Changed
 * 修改部分语法规范
 * 修改项目根目录BASE_PATH为ROOT_PATH
 * 修改单元测试目录为TESTS_PATH
 * 优化清除缓存数据脚本
+* 修改文件注释规则
+
 ### Fixed
 * 修改Redis缓存配置报错的BUG
 

@@ -1,5 +1,11 @@
 <?php
-
+// +----------------------------------------------------------------------
+// | 自动加载文件 [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
+// +----------------------------------------------------------------------
 $loader = new \Phalcon\Loader();
 
 /**
@@ -16,6 +22,7 @@ $loader
             'MyApp\Traits\System' => $config->application->traitsDir . 'system/',
             'MyApp\Listeners' => $config->application->listenersDir,
             'MyApp\Listeners\System' => $config->application->listenersDir . 'system/',
+            'MyApp\Logics' => $config->application->logicsDir,
         ]
     )->registerFiles(
         [

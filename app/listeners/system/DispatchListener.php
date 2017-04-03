@@ -2,11 +2,9 @@
 // +----------------------------------------------------------------------
 // | 调度器 LISTENER [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2016 http://www.lmx0536.cn All rights reserved.
+// | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
-// +----------------------------------------------------------------------
-// | Date: 2017/2/28 Time: 下午4:02
+// | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
 namespace MyApp\Listeners\System;
 
@@ -16,6 +14,16 @@ use Phalcon\Mvc\Dispatcher;
 
 class DispatchListener
 {
+    public function beforeExecuteRoute(Event $event, Dispatcher $dispatcher)
+    {
+        // 在每一个找到的动作前执行
+    }
+
+    public function afterExecuteRoute(Event $event, Dispatcher $dispatcher)
+    {
+        // 在每一个找到的动作后执行
+    }
+
     public function beforeException(Event $event, $dispatcher, Exception $exception)
     {
         // 代替控制器或者动作不存在时的路径

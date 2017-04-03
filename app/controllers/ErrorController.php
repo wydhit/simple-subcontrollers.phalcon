@@ -6,27 +6,52 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
 // +----------------------------------------------------------------------
-// | Date: 2016/11/15 Time: 15:13
-// +----------------------------------------------------------------------
 namespace MyApp\Controllers;
 
 use Phalcon\Mvc\Controller;
+use MyApp\Traits\System\Response;
 
 class ErrorController extends Controller
 {
+    use Response;
 
+    /**
+     * @desc   404
+     * @author limx
+     * @return bool|\Phalcon\Mvc\View
+     */
     public function show404Action()
     {
         if ($this->request->isPost()) {
-            return error('页面找不到了~');
+            return self::error('页面找不到了~');
         }
         return $this->view->render('public', '404');
     }
 
+    /**
+     * @desc   View方式返回错误
+     * @author limx
+     * @param string $code
+     * @param string $msg
+     * @return bool|\Phalcon\Mvc\View
+     */
     public function indexAction($code = '500', $msg = '出错了')
     {
         $this->view->code = $code;
         $this->view->msg = $msg;
         return $this->view->render('public', 'error');
+    }
+
+    /**
+     * @desc   json方式返回错误
+     * @author limx
+     * @param $status
+     * @param $msg
+     * @param $data
+     * @return mixed
+     */
+    public function jsonAction($status = 0, $msg = "", $data = [])
+    {
+        return self::response($status, $data, $msg);
     }
 }
