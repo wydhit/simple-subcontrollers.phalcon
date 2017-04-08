@@ -18,4 +18,9 @@ class Test extends \Phalcon\Di\Injectable
         $cache = $this->cache;
         $cache->save('logic-test-index', ['time' => time()]);
     }
+
+    public function incrSql()
+    {
+        $sql = "";
+    }
 }
