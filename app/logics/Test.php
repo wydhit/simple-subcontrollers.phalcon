@@ -26,12 +26,12 @@ class Test extends \Phalcon\Di\Injectable
         $username = 'limx';
         $password = md5(910123);
         $name = Str::random(6);
-        // $name = "test";
+        $test_name = "test";
 
         // 单唯一索引
         $sql = "INSERT INTO user(`username`,`password`,`name`,`role_id`)
-            VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE `name`=?";
-        $res = DB::execute($sql, [$username, $password, $name, 1, $name], true);
+            VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE `name`= IF (`name`='test',?,?)";
+        $res = DB::execute($sql, [$username, $password, $name, 1, $name, $test_name], true);
 
         // 联合唯一索引
         // $sql = "INSERT INTO user_title(`uid`,`title_id`,`created_at`,`updated_at`)
