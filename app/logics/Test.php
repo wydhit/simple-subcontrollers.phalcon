@@ -26,16 +26,18 @@ class Test extends \Phalcon\Di\Injectable
         $username = 'limx';
         $password = md5(910123);
         $name = Str::random(6);
+        // $name = "test";
 
         // 单唯一索引
-        // $sql = "INSERT INTO user(`username`,`password`,`name`,`role_id`)
-        //     VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE `name`=?";
-        // $res = DB::execute($sql, [$username, $password, $name, 1, $name], true);
+        $sql = "INSERT INTO user(`username`,`password`,`name`,`role_id`)
+            VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE `name`=?";
+        $res = DB::execute($sql, [$username, $password, $name, 1, $name], true);
 
         // 联合唯一索引
-        $sql = "INSERT INTO user_title(`uid`,`title_id`,`created_at`,`updated_at`) 
-            VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE `updated_at`=?";
-        $res = DB::execute($sql, [1, 18, date('Y-m-d H:i:s'), date('Y-m-d H:i:s'), date('Y-m-d H:i:s')], true);
+        // $sql = "INSERT INTO user_title(`uid`,`title_id`,`created_at`,`updated_at`)
+        //     VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE `updated_at`=?";
+        // $res = DB::execute($sql, [1, 18, date('Y-m-d H:i:s'), date('Y-m-d H:i:s'), date('Y-m-d H:i:s')], true);
+
         return $res;
     }
 }
