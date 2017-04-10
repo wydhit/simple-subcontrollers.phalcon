@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace MyApp\Tasks\Test;
 
+use limx\phalcon\Redis;
 use limx\tools\LRedis;
 use Phalcon\Cli\Task;
 use limx\phalcon\DB;
@@ -32,6 +33,14 @@ class RedisTask extends Task
     private function redisClient()
     {
         $config = di('config');
+        $redis = Redis::getInstance(
+            $config->redis->host,
+            $config->redis->auth,
+            $config->redis->index,
+            $config->redis->port
+        );
+        return $redis;
+
         $redis = LRedis::getInstance([
             'host' => $config->redis->host,
             'auth' => $config->redis->auth,
