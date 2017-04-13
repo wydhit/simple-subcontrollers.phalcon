@@ -25,4 +25,10 @@ class Test1Task extends Task
             echo "$" . $money . "->" . $coin . "\n";
         }
     }
+
+    public function sleepAction()
+    {
+        sleep(5);
+        logger("延时操作！");
+    }
 }
