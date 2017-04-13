@@ -26,7 +26,7 @@ class IndexController extends ControllerBase
     public function pcloseAction()
     {
         $path = ROOT_PATH;
-        $command = sprintf("php %s/run Test\\\\Test1 sleep &", $path);
+        $command = sprintf("php %s/run Test\\\\Test sleep &", $path);
         pclose(popen($command, 'r'));
         echo $command;
     }

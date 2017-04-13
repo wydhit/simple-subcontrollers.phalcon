@@ -12,23 +12,25 @@ namespace MyApp\Tasks\Test;
 
 use Phalcon\Cli\Task;
 
-class Test1Task extends Task
+class TestTask extends Task
 {
-    private $money = [5, 15, 50, 99, 299, 999];
 
     public function mainAction()
     {
-        foreach ($this->money as $money) {
-            $mei = $money - (floatval($money) * 0.029 + 0.3);
-            $ren = $mei * 7;
-            $coin = $ren * 10;
-            echo "$" . $money . "->" . $coin . "\n";
-        }
+        echo Color::head('Help:'), PHP_EOL;
+        echo Color::colorize('  测试脚本'), PHP_EOL, PHP_EOL;
+
+        echo Color::head('Usage:'), PHP_EOL;
+        echo Color::colorize('  php run Test\\\\Test [action]', Color::FG_GREEN), PHP_EOL, PHP_EOL;
+
+        echo Color::head('Actions:'), PHP_EOL;
+        echo Color::colorize('  sleep       延时脚本', Color::FG_GREEN), PHP_EOL;
     }
 
     public function sleepAction()
     {
+        logger("延时操作BEGIN");
         sleep(5);
-        logger("延时操作！");
+        logger("延时操作END");
     }
 }
