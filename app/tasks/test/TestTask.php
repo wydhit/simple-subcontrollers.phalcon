@@ -27,10 +27,14 @@ class TestTask extends Task
         echo Color::colorize('  sleep       延时脚本', Color::FG_GREEN), PHP_EOL;
     }
 
-    public function sleepAction()
+    public function sleepAction($params)
     {
+        $time = 5;
+        if (count($params) > 0) {
+            $time = intval($params[0]);
+        }
         logger("延时操作BEGIN");
-        sleep(5);
+        sleep($time);
         logger("延时操作END");
     }
 }
