@@ -2,11 +2,11 @@
 
 namespace MyApp\Controllers\Test;
 
-use MyApp\Models\Test\Role;
-use MyApp\Models\Test\Title;
-use MyApp\Models\Test\User;
-use MyApp\Models\Test\Book;
-use MyApp\Models\Test\UserTitle;
+use MyApp\Models\Role;
+use MyApp\Models\Title;
+use MyApp\Models\User;
+use MyApp\Models\Book;
+use MyApp\Models\UserTitle;
 
 use limx\phalcon\DB;
 use Phalcon\Paginator\Adapter\Model as PaginatorModel;
@@ -336,7 +336,7 @@ class ModelController extends ControllerBase
 
     public function incrAction()
     {
-        
+
     }
 
 }

@@ -1,10 +1,8 @@
 <?php
 
-namespace MyApp\Models\Test;
+namespace MyApp\Models;
 
-use Phalcon\Mvc\Model\Validator\Email as EmailValidator;
-
-class User extends \Phalcon\Mvc\Model
+class Title extends Model
 {
 
     /**
@@ -21,35 +19,7 @@ class User extends \Phalcon\Mvc\Model
      * @var string
      * @Column(type="string", length=255, nullable=false)
      */
-    public $username;
-
-    /**
-     *
-     * @var string
-     * @Column(type="string", length=255, nullable=false)
-     */
-    public $password;
-
-    /**
-     *
-     * @var string
-     * @Column(type="string", length=255, nullable=false)
-     */
     public $name;
-
-    /**
-     *
-     * @var string
-     * @Column(type="string", length=255, nullable=true)
-     */
-    public $email;
-
-    /**
-     *
-     * @var integer
-     * @Column(type="integer", length=11, nullable=false)
-     */
-    public $role_id;
 
     /**
      *
@@ -66,13 +36,11 @@ class User extends \Phalcon\Mvc\Model
     public $updated_at;
 
     /**
-     * Validations and business logic
-     *
-     * @return boolean
+     * Initialize method for model.
      */
-    public function validation()
+    public function initialize()
     {
-        return true;
+        $this->setSchema("phalcon");
     }
 
 
@@ -90,23 +58,11 @@ class User extends \Phalcon\Mvc\Model
         $this->updated_at = date("Y-m-d H:i:s");
     }
 
-
-    public function initialize()
-    {
-        $this->hasMany('id', 'MyApp\\Models\\Test\\Book', 'uid', ['alias' => 'book']);
-        $this->hasManyToMany(
-            'id',
-            'MyApp\\Models\\Test\\UserTitle', 'uid', 'title_id',
-            'MyApp\\Models\\Test\\Title', 'id',
-            ['alias' => 'title']
-        );
-    }
-
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return User[]
+     * @return Title[]
      */
     public static function find($parameters = null)
     {
@@ -117,7 +73,7 @@ class User extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return User
+     * @return Title
      */
     public static function findFirst($parameters = null)
     {
@@ -131,7 +87,7 @@ class User extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'user';
+        return 'title';
     }
 
 }

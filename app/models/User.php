@@ -1,8 +1,8 @@
 <?php
 
-namespace MyApp\Models\Test;
+namespace MyApp\Models;
 
-class Role extends \Phalcon\Mvc\Model
+class User extends Model
 {
 
     /**
@@ -19,7 +19,35 @@ class Role extends \Phalcon\Mvc\Model
      * @var string
      * @Column(type="string", length=255, nullable=false)
      */
+    public $username;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
+     */
+    public $password;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
+     */
     public $name;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=true)
+     */
+    public $email;
+
+    /**
+     *
+     * @var integer
+     * @Column(type="integer", length=11, nullable=false)
+     */
+    public $role_id;
 
     /**
      *
@@ -36,11 +64,13 @@ class Role extends \Phalcon\Mvc\Model
     public $updated_at;
 
     /**
-     * Initialize method for model.
+     * Validations and business logic
+     *
+     * @return boolean
      */
-    public function initialize()
+    public function validation()
     {
-        $this->setSchema("phalcon");
+        return true;
     }
 
 
@@ -58,11 +88,23 @@ class Role extends \Phalcon\Mvc\Model
         $this->updated_at = date("Y-m-d H:i:s");
     }
 
+
+    public function initialize()
+    {
+        $this->hasMany('id', 'MyApp\\Models\\Book', 'uid', ['alias' => 'book']);
+        $this->hasManyToMany(
+            'id',
+            'MyApp\\Models\\UserTitle', 'uid', 'title_id',
+            'MyApp\\Models\\Title', 'id',
+            ['alias' => 'title']
+        );
+    }
+
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Role[]
+     * @return User[]
      */
     public static function find($parameters = null)
     {
@@ -73,7 +115,7 @@ class Role extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Role
+     * @return User
      */
     public static function findFirst($parameters = null)
     {
@@ -87,7 +129,7 @@ class Role extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'role';
+        return 'user';
     }
 
 }

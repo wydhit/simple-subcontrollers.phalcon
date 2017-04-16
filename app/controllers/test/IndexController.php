@@ -7,7 +7,7 @@ use limx\tools\MyRedis;
 use limx\func\Match;
 use limx\func\Str;
 use limx\phalcon\DB;
-use MyApp\Models\Test\User;
+use MyApp\Models\User;
 use limx\func\Curl;
 use limx\tools\MyPDO;
 

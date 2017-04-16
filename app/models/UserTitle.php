@@ -1,8 +1,8 @@
 <?php
 
-namespace MyApp\Models\Test;
+namespace MyApp\Models;
 
-class Book extends \Phalcon\Mvc\Model
+class UserTitle extends Model
 {
 
     /**
@@ -23,31 +23,55 @@ class Book extends \Phalcon\Mvc\Model
 
     /**
      *
-     * @var string
-     * @Column(type="string", length=255, nullable=false)
+     * @var integer
+     * @Column(type="integer", length=11, nullable=false)
      */
-    public $name;
+    public $title_id;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(type="string", nullable=false)
      */
     public $created_at;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(type="string", nullable=false)
      */
     public $updated_at;
 
     /**
-     *
-     * @var double
-     * @Column(type="double", length=10, nullable=true)
+     * Initialize method for model.
      */
-    public $money;
+    public function initialize()
+    {
+        $this->setSchema("phalcon");
+    }
+
+
+    public function beforeValidationOnCreate()
+    {
+        $res = $this->findFirst([
+            'conditions' => 'uid=?0 AND title_id=?1',
+            'bind' => [
+                $this->uid,
+                $this->title_id
+            ],
+        ]);
+        if ($res) {
+            $message = new \Phalcon\Mvc\Model\Message(
+                "Sorry, The relation is existed",
+                "type",
+                "MyType"
+            );
+
+            $this->appendMessage($message);
+            return false;
+        }
+        return true;
+    }
 
 
     public function beforeCreate()
@@ -64,17 +88,11 @@ class Book extends \Phalcon\Mvc\Model
         $this->updated_at = date("Y-m-d H:i:s");
     }
 
-
-    public function initialize()
-    {
-        $this->belongsTo('uid', 'MyApp\\Models\\Test\\User', 'id', ['alias' => 'user']);
-    }
-
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Book[]
+     * @return UserTitle[]
      */
     public static function find($parameters = null)
     {
@@ -85,7 +103,7 @@ class Book extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Book
+     * @return UserTitle
      */
     public static function findFirst($parameters = null)
     {
@@ -99,7 +117,7 @@ class Book extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'book';
+        return 'user_title';
     }
 
 }
