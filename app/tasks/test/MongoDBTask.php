@@ -29,9 +29,27 @@ class MongoDBTask extends Task
         echo Color::colorize('  delete         删除记录', Color::FG_GREEN) . PHP_EOL;
     }
 
+    private function mongoManager()
+    {
+        $config = di('config');
+        $host = $config->mongo->host;
+        $port = $config->mongo->port;
+        $uri = "mongodb://{$host}:{$port}";
+        $options = [
+            'connect' => $config->mongo->connect, // true表示Mongo构造函数中建立连接。
+            'timeout' => $config->mongo->timeout, // 配置建立连接超时时间，单位是ms
+            'replicaSet' => $config->mongo->replicaSet, // 配置replicaSet名称
+            'username' => $config->mongo->username, // 覆盖$server字符串中的username段，如果username包含冒号:时，选用此种方式。
+            'password' => $config->mongo->password, // 覆盖$server字符串中的password段，如果password包含符号@时，选用此种方式。
+            'db' => $config->mongo->db // 覆盖$server字符串中的database段
+        ];
+        return new MongoDB\Driver\Manager($uri, $options);
+    }
+
     public function deleteAction()
     {
-        $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+        // $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+        $manager = $this->mongoManager("mongodb://localhost:27017");
         $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 
         $bulk = new MongoDB\Driver\BulkWrite;
@@ -44,7 +62,8 @@ class MongoDBTask extends Task
 
     public function updateAction()
     {
-        $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+        // $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+        $manager = $this->mongoManager("mongodb://localhost:27017");
         $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
 
         $bulk = new MongoDB\Driver\BulkWrite;
@@ -59,8 +78,9 @@ class MongoDBTask extends Task
 
     public function queryAction()
     {
-        $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-
+        // $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+        $manager = $this->mongoManager("mongodb://localhost:27017");
+        // sleep(1);
         $filter = ['id' => ['$gt' => 1]];
         $options = [
             'projection' => ['_id' => 0],
@@ -78,7 +98,8 @@ class MongoDBTask extends Task
 
     public function insertAction()
     {
-        $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+        // $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+        $manager = $this->mongoManager("mongodb://localhost:27017");
         $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
         $bulk = new MongoDB\Driver\BulkWrite;
 
