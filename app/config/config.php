@@ -214,13 +214,13 @@ return new Config(
                 'system/error.php',
                 'system/cookies.php',
                 'system/crypt.php',
-                // 'system/redis.php',
+                'system/redis.php',
             ],
             'cli' => [
                 'system/cache.php',
                 'system/error.php',
                 'system/crypt.php',
-                // 'system/redis.php',
+                'system/redis.php',
             ],
         ],
 
