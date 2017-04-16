@@ -6,11 +6,11 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace MyApp\Tasks\Test;
+namespace App\Tasks\Test;
 
 use limx\phalcon\Redis;
 use limx\tools\LRedis;
-use MyApp\Utils\Redis as RedisUtil;
+use App\Utils\Redis as RedisUtil;
 use Phalcon\Cli\Task;
 use limx\phalcon\DB;
 use limx\phalcon\Cli\Color;

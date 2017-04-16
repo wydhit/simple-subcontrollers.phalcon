@@ -1,6 +1,6 @@
 <?php
 
-namespace MyApp\Models;
+namespace App\Models;
 
 class Book extends Model
 {
@@ -67,7 +67,7 @@ class Book extends Model
 
     public function initialize()
     {
-        $this->belongsTo('uid', 'MyApp\\Models\\User', 'id', ['alias' => 'user']);
+        $this->belongsTo('uid', 'App\\Models\\User', 'id', ['alias' => 'user']);
     }
 
     /**

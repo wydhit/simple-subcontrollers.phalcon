@@ -1,6 +1,6 @@
 <?php
 
-namespace MyApp\Models;
+namespace App\Models;
 
 class User extends Model
 {
@@ -91,11 +91,11 @@ class User extends Model
 
     public function initialize()
     {
-        $this->hasMany('id', 'MyApp\\Models\\Book', 'uid', ['alias' => 'book']);
+        $this->hasMany('id', 'App\\Models\\Book', 'uid', ['alias' => 'book']);
         $this->hasManyToMany(
             'id',
-            'MyApp\\Models\\UserTitle', 'uid', 'title_id',
-            'MyApp\\Models\\Title', 'id',
+            'App\\Models\\UserTitle', 'uid', 'title_id',
+            'App\\Models\\Title', 'id',
             ['alias' => 'title']
         );
     }
