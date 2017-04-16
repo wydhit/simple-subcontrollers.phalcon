@@ -9,7 +9,7 @@
 namespace MyApp\Logics;
 
 use limx\phalcon\Cli\Color;
-use limx\phalcon\DB;
+use MyApp\Utils\DB;
 use limx\phalcon\Utils\Str;
 
 class Test extends \Phalcon\Di\Injectable
