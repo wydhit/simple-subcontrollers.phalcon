@@ -6,12 +6,11 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <http://www.lmx0536.cn>
 // +----------------------------------------------------------------------
-namespace MyApp\Controllers;
+namespace App\Controllers;
 
-use Phalcon\Mvc\Controller;
-use MyApp\Traits\System\Response;
+use App\Traits\System\Response;
 
-class ErrorController extends Controller
+class ErrorController extends \Phalcon\Mvc\Controller
 {
     use Response;
 

@@ -1,19 +1,18 @@
 <?php
 // +----------------------------------------------------------------------
-// | Common 逻辑类 [ WE CAN DO IT JUST THINK IT ]
+// | Redis工具类 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace App\Logics;
+namespace App\Utils;
 
-use Phalcon\Di\Injectable;
-
-class Common extends Injectable
+class Redis
 {
-    public function version()
+    public static function __callStatic($name, $arguments)
     {
-        return $this->config->version;
+        $redis = di('redis');
+        return call_user_func_array([$redis, $name], $arguments);
     }
 }

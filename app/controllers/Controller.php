@@ -6,12 +6,11 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace MyApp\Controllers;
+namespace App\Controllers;
 
-use Phalcon\Mvc\Controller;
-use MyApp\Traits\System\Response;
+use App\Traits\System\Response;
 
-class ControllerBase extends Controller
+class Controller extends \Phalcon\Mvc\Controller
 {
     use Response;
     const USER_ID = 'id';
