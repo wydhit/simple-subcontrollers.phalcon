@@ -8,10 +8,11 @@
 // +----------------------------------------------------------------------
 namespace App\Tasks\System;
 
-use App\Logics\Common;
+use App\Logics\System;
+use limx\phalcon\Utils\File;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
-use Phalcon\Version;
+use Phalcon\Annotations\Adapter\Memory as MemoryAdapter;
 
 class InfoTask extends Task
 {
@@ -29,38 +30,33 @@ class InfoTask extends Task
 
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  version                         项目版本', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  annotations                     获取控制器方法注释', Color::FG_GREEN) . PHP_EOL;
+    }
+
+    public function annotationsAction()
+    {
+        echo Color::head("控制器方法获取:"), PHP_EOL;
+        $res = System::getControllersAnnotations(0, true);
+        foreach ($res as $method) {
+            echo Color::colorize(sprintf("  方法名：%s", $method['method']), Color::FG_GREEN), PHP_EOL;
+            if (isset($method['annotation'])) {
+                foreach ($method['annotation'] as $annotation) {
+                    echo Color::colorize(sprintf("  注释：%s", json_encode($annotation)), Color::FG_GREEN), PHP_EOL;
+                }
+            }
+            echo PHP_EOL;
+        }
     }
 
     public function versionAction()
     {
         echo Color::head("Environment:"), PHP_EOL;
-        foreach ($this->getEnvironment() as $k => $v) {
+        foreach (System::getEnvironment() as $k => $v) {
             echo Color::colorize(sprintf("  %s: %s", $k, $v), Color::FG_GREEN), PHP_EOL;
         }
         echo Color::head("Versions:"), PHP_EOL;
-        foreach ($this->getVersions() as $k => $v) {
+        foreach (System::getVersions() as $k => $v) {
             echo Color::colorize(sprintf("  %s: %s", $k, $v), Color::FG_GREEN), PHP_EOL;
         }
-    }
-
-    private function getVersions()
-    {
-        return [
-            'Phalcon Version' => Version::get(),
-            'Project Version' => (new Common())->version(),
-        ];
-    }
-
-    private function getEnvironment()
-    {
-        return [
-            'OS' => php_uname(),
-            'PHP Version' => PHP_VERSION,
-            'PHP SAPI' => php_sapi_name(),
-            'PHP Bin' => PHP_BINARY,
-            'PHP Extension Dir' => PHP_EXTENSION_DIR,
-            'PHP Bin Dir' => PHP_BINDIR,
-            'Loaded PHP config' => php_ini_loaded_file(),
-        ];
     }
 }
