@@ -1,13 +1,28 @@
 # Release Note
 
 ## [Unreleased]
+### Checked
+- [ ] php单元测试
+
 ### Added
-* 增加mongodb配置
-* 增加mongodb缓存适配器【phalcon底层不支持php7 mongo扩展】
 
 ### Changed
  
 ### Fixed
+
+## [1.7.8]
+### Checked
+- [x] php单元测试
+
+### Added
+* 增加mongodb配置
+* 增加mongodb缓存适配器【phalcon底层不支持php7 mongo扩展】
+* 数据库SQL语句监听日志，增加绑定参数记录
+* 增加缓存工具类
+* 增加devtools控制器配置
+* 增加devtools模型配置
+* 增加Info系统脚本
+* 增加控制器注释列表获取方法
 
 ## [1.7.3]
 ### Added
