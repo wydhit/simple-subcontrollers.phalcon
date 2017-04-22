@@ -1,9 +1,9 @@
 <?php
 
-namespace MyApp\Controllers;
+namespace App\Controllers;
 
 use Phalcon\Mvc\Controller;
-use MyApp\Traits\System\Response;
+use App\Traits\System\Response;
 
 class LoginController extends Controller
 {
@@ -18,7 +18,7 @@ class LoginController extends Controller
 
     /**
      * [pfnLoginAction desc]
-     * @desc 登录
+     * @desc   登录
      * @author limx
      */
     public function pfnLoginAction()
@@ -45,7 +45,7 @@ class LoginController extends Controller
 
     /**
      * [pfnLogout desc]
-     * @desc 退出登录
+     * @desc   退出登录
      * @author limx
      * @return mixed
      */

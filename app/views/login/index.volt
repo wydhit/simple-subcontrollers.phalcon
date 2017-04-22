@@ -20,6 +20,7 @@
                 </form>
             </div>
         </div>
+        {% include "public/bottomBar.volt" %}
     </div>
     <input type="hidden" id="postUrl" value="{{ url('/login/pfnLogin') }}">
     <input type="hidden" id="targetUrl" value="{{ url('/index/index') }}">
