@@ -44,6 +44,7 @@ class MainTask extends Task
         echo Color::colorize('  Sphinx                  Sphinx全文检索引擎', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Ymal                    Ymal函数相关测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Str                     字符串相关测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  Swoole                  Swoole测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Test                    其他测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Yaml                    Yaml扩展测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Zip                     Zip相关测试', Color::FG_GREEN), PHP_EOL;
