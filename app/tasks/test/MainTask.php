@@ -39,6 +39,7 @@ class MainTask extends Task
         echo Color::colorize('  Redis                   Redis测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Rsa                     Rsa加密测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Shell                   php运行shell脚本测试', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  Signal                  php信号脚本测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Sort                    排序算法测试', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Sphinx                  Sphinx全文检索引擎', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  Ymal                    Ymal函数相关测试', Color::FG_GREEN), PHP_EOL;
