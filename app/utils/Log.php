@@ -12,83 +12,160 @@ use limx\phalcon\Logger;
 
 class Log
 {
-    /** @var null 日志目录 */
-    protected $dir = null;
+    /** 日志目录 */
+    const DIR = null;
 
-    /** @var string 文件名 */
-    protected $fileName = "logger.log";
+    /** 文件名 */
+    const FILE_NAME = "logger.log";
 
-    /** @var string 日志类型 */
-    protected $type = "file";
+    /** 日志类型 */
+    const TYPE = "file";
 
-    public function __construct()
+    /**
+     * @desc   获取日志类实例
+     * @author limx
+     * @return mixed
+     */
+    public static function logger()
     {
-        return Logger::getInstance($this->type, $this->fileName, $this->dir);
+        return Logger::getInstance(static::TYPE, static::FILE_NAME, static::DIR);
     }
 
+    /**
+     * @desc   Sends/Writes messages to the file log
+     * @author limx
+     * @param  mixed      $type
+     * @param  mixed      $message
+     * @param  array|null $context
+     * @return mixed
+     */
     public static function log($type, $message = null, array $context = null)
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->log($type, $message, $context);
     }
 
+    /**
+     * @desc   Starts a transaction
+     * @author limx
+     * @return mixed
+     */
     public static function begin()
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->begin();
     }
 
+    /**
+     * @desc   Commits the internal transaction
+     * @author limx
+     * @return mixed
+     */
     public static function commit()
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->commit();
     }
 
+    /**
+     * @desc   Rollbacks the internal transaction
+     * @author limx
+     * @return mixed
+     */
     public static function rollback()
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->rollback();
     }
 
-    public static function debug($message, $context = null)
+    /**
+     * @desc   Sends/Writes a debug message to the log
+     * @author limx
+     * @param  string $message
+     * @param  array  $context
+     * @return mixed
+     */
+    public static function debug($message, array $context = null)
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->debug($message, $context);
     }
 
-    public static function error($message, $context = null)
+    /**
+     * @desc   Sends/Writes an error message to the log
+     * @author limx
+     * @param  string $message
+     * @param  array  $context
+     * @return mixed
+     */
+    public static function error($message, array $context = null)
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->error($message, $context);
     }
 
-    public static function info($message, $context = null)
+    /**
+     * @desc   Sends/Writes an info message to the log
+     * @author limx
+     * @param  string $message
+     * @param  array  $context
+     * @return mixed
+     */
+    public static function info($message, array $context = null)
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->info($message, $context);
     }
 
-    public static function notice($message, $context = null)
+    /**
+     * @desc   Sends/Writes a notice message to the log
+     * @author limx
+     * @param  string     $message
+     * @param  array|null $context
+     * @return mixed
+     */
+    public static function notice($message, array $context = null)
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->notice($message, $context);
     }
 
-    public static function warning($message, $context = null)
+    /**
+     * @desc   Sends/Writes a warning message to the log
+     * @author limx
+     * @param  string     $message
+     * @param  array|null $context
+     * @return mixed
+     */
+    public static function warning($message, array $context = null)
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->warning($message, $context);
     }
 
-    public static function alert($message, $context = null)
+    /**
+     * @desc   Sends/Writes an alert message to the log
+     * @author limx
+     * @param  string     $message
+     * @param  array|null $context
+     * @return mixed
+     */
+    public static function alert($message, array $context = null)
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->alert($message, $context);
     }
 
-    public static function emergency($message, $context = null)
+    /**
+     * @desc   Sends/Writes an emergency message to the log
+     * @author limx
+     * @param  string     $message
+     * @param  array|null $context
+     * @return mixed
+     */
+    public static function emergency($message, array $context = null)
     {
-        $logger = new self();
+        $logger = static::logger();
         return $logger->emergency($message, $context);
     }
 
