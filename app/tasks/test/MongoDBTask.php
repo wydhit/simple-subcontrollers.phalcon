@@ -12,6 +12,8 @@ use App\Utils\Mongo;
 use Phalcon\Cli\Task;
 use limx\phalcon\Cli\Color;
 use MongoDB;
+use MongoDB\BSON\Timestamp;
+
 
 class MongoDBTask extends Task
 {
@@ -55,9 +57,11 @@ class MongoDBTask extends Task
     public function utilQueryAction()
     {
         $filter = ['id' => [Mongo::_GT => 1]];
+        $filter = ['id' => 999];
         $options = [
             'projection' => ['_id' => 0],
             'sort' => ['id' => Mongo::SORT_DESC],
+            // Mongo::OPTION_LIMIT => '1',
         ];
         $res = Mongo::query('user', $filter, $options);
         foreach ($res as $row) {
@@ -65,19 +69,41 @@ class MongoDBTask extends Task
         }
     }
 
-    public function utilInsertAction()
+    public function utilInsertAction($params = [])
     {
-        $document = ['id' => rand(1, 5), 'name' => uniqid()];
-        $result = Mongo::insert('user', $document);
+        $num = 1;
+        if (isset($params[0])) {
+            $num = $params[0];
+        }
+        if (!is_numeric($num)) {
+            echo Color::error("条数必须为数字！"), PHP_EOL;
+            return;
+        }
+        if ($num == 1) {
+            $time = new Timestamp(0, time());
+            $document = ['id' => rand(1, 5), 'name' => uniqid(), 'create_at' => $time];
+            $result = Mongo::insert('user', $document);
+        } else {
+            $documents = [];
+            for ($i = 0; $i < $num; $i++) {
+                $time = new Timestamp(0, time());
+                $documents[] = ['id' => rand(1, $num), 'name' => uniqid(), 'create_at' => $time];
+            }
+            $result = Mongo::insert('user', $documents, false);
+        }
+
         echo Color::colorize("insertedCount： " . $result->getInsertedCount()), PHP_EOL;
         echo Color::colorize("upsertedIds： " . json_encode($result->getUpsertedIds())), PHP_EOL;
     }
 
     public function utilUpdateAction()
     {
-        $filter = ['id' => 6];
+        $filter = ['id' => 999];
         $document = ['name' => uniqid(), 'changed' => 2];
-        $options = [Mongo::OPTION_UPSERT => true];
+        $options = [
+            Mongo::OPTION_UPSERT => true,
+            Mongo::OPTION_MULTI => true,
+        ];
         $result = Mongo::update('user', $filter, $document, $options);
         echo Color::colorize("modifiedCount： " . $result->getModifiedCount()), PHP_EOL;
         echo Color::colorize("upsertedCount： " . $result->getUpsertedCount()), PHP_EOL;
@@ -87,6 +113,7 @@ class MongoDBTask extends Task
     public function utilDeleteAction()
     {
         $filter = ['id' => 4];
+        $filter = ['id' => [Mongo::_GT => 0]];
         $options = [Mongo::OPTION_LIMIT => false];
         $result = Mongo::delete('user', $filter, $options);
         echo Color::colorize("deletedCount： " . $result->getDeletedCount()), PHP_EOL;
