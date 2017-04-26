@@ -64,6 +64,27 @@ $di->setShared('modelsMetadata', function () use ($config) {
     );
 });
 
+$di->setShared('mongo', function () use ($config) {
+    $host = $config->mongo->host;
+    $port = $config->mongo->port;
+    $uri = "mongodb://{$host}:{$port}";
+    $options = [
+        'connect' => $config->mongo->connect, // true表示Mongo构造函数中建立连接。
+        'timeout' => $config->mongo->timeout, // 配置建立连接超时时间，单位是ms
+        'replicaSet' => $config->mongo->replicaSet, // 配置replicaSet名称
+        'username' => $config->mongo->username, // 覆盖$server字符串中的username段，如果username包含冒号:时，选用此种方式。
+        'password' => $config->mongo->password, // 覆盖$server字符串中的password段，如果password包含符号@时，选用此种方式。
+        'db' => $config->mongo->db // 覆盖$server字符串中的database段
+    ];
+    $con = new MongoClient($uri, array('username' => $config->mongo->username, 'password' => $config->mongo->password));
+    return $con->selectDB($config->mongo->db);
+    return new MongoDB\Driver\Manager($uri, $options);
+});
+
+$di->setShared('collectionManager', function () {
+    return new Phalcon\Mvc\Collection\Manager();
+});
+
 $di->setShared('app', function () {
     // 加载app.php 配置文件
     $app = APP_PATH . '/config/app.php';

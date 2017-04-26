@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Models;
 
-class Model extends \Phalcon\Mvc\Model
+class Model extends \Phalcon\Mvc\Collection
 {
 
     /**
