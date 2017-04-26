@@ -30,6 +30,9 @@ class MongoDBTask extends Task
         echo Color::colorize('  delete         删除记录', Color::FG_GREEN) . PHP_EOL;
 
         echo Color::colorize('  utilQuery      工具类查询记录', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  utilInsert     工具类插入记录', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  utilUpdate     工具类更新记录', Color::FG_GREEN) . PHP_EOL;
+        echo Color::colorize('  utilDelete     工具类删除记录', Color::FG_GREEN) . PHP_EOL;
     }
 
     private function mongoManager()
@@ -51,13 +54,42 @@ class MongoDBTask extends Task
 
     public function utilQueryAction()
     {
-        $filter = ['id' => ['$gt' => 1]];
+        $filter = ['id' => [Mongo::_GT => 1]];
         $options = [
             'projection' => ['_id' => 0],
-            'sort' => ['id' => -1],
+            'sort' => ['id' => Mongo::SORT_DESC],
         ];
         $res = Mongo::query('user', $filter, $options);
-        print_r($res);
+        foreach ($res as $row) {
+            echo Color::colorize(json_encode($row)), PHP_EOL;
+        }
+    }
+
+    public function utilInsertAction()
+    {
+        $document = ['id' => rand(1, 5), 'name' => uniqid()];
+        $result = Mongo::insert('user', $document);
+        echo Color::colorize("insertedCount： " . $result->getInsertedCount()), PHP_EOL;
+        echo Color::colorize("upsertedIds： " . json_encode($result->getUpsertedIds())), PHP_EOL;
+    }
+
+    public function utilUpdateAction()
+    {
+        $filter = ['id' => 6];
+        $document = ['name' => uniqid(), 'changed' => 2];
+        $options = [Mongo::OPTION_UPSERT => true];
+        $result = Mongo::update('user', $filter, $document, $options);
+        echo Color::colorize("modifiedCount： " . $result->getModifiedCount()), PHP_EOL;
+        echo Color::colorize("upsertedCount： " . $result->getUpsertedCount()), PHP_EOL;
+
+    }
+
+    public function utilDeleteAction()
+    {
+        $filter = ['id' => 4];
+        $options = [Mongo::OPTION_LIMIT => false];
+        $result = Mongo::delete('user', $filter, $options);
+        echo Color::colorize("deletedCount： " . $result->getDeletedCount()), PHP_EOL;
     }
 
     public function deleteAction()
