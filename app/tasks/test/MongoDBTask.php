@@ -80,13 +80,13 @@ class MongoDBTask extends Task
             return;
         }
         if ($num == 1) {
-            $time = new Timestamp(0, time());
+            $time = new MongoDB\BSON\UTCDateTime(microtime(true) * 1000);
             $document = ['id' => rand(1, 5), 'name' => uniqid(), 'create_at' => $time];
             $result = Mongo::insert('user', $document);
         } else {
             $documents = [];
             for ($i = 0; $i < $num; $i++) {
-                $time = new Timestamp(0, time());
+                $time = new MongoDB\BSON\UTCDateTime(microtime(true) * 1000);
                 $documents[] = ['id' => rand(1, $num), 'name' => uniqid(), 'create_at' => $time];
             }
             $result = Mongo::insert('user', $documents, false);
