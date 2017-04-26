@@ -22,4 +22,10 @@ class MongoTask extends Task
         $user = User::findFirst();
         echo $user->name;
     }
+
+    public function findAction()
+    {
+        $user = User::findFirst();
+        echo $user->name;
+    }
 }
