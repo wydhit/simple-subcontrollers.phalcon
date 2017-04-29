@@ -26,7 +26,7 @@ return new Config(
         | This value is version for this project.
         |
         */
-        'version' => '1.7.9',
+        'version' => '1.7.10',
 
         /*
         |--------------------------------------------------------------------------
@@ -112,6 +112,8 @@ return new Config(
             'password' => env('MONGODB_PASSWORD', null),
             'db' => env('MONGODB_DB', null),
             'collection' => env('MONGODB_COLLECTION', null),
+            // 是否开启Mongo辅助类
+            'utils' => env('MONGODB_UTILS', false),
         ],
 
         /*
@@ -235,12 +237,14 @@ return new Config(
                 'system/cookies.php',
                 'system/crypt.php',
                 // 'system/redis.php',
+                // 'system/mongo.php',
             ],
             'cli' => [
                 'system/cache.php',
                 'system/error.php',
                 'system/crypt.php',
                 // 'system/redis.php',
+                // 'system/mongo.php',
             ],
         ],
 
