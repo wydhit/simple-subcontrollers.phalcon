@@ -28,18 +28,25 @@ class EncryptTask extends Task
 
     public function aesAction()
     {
-        // $data = 'phpbest';
-        // echo openssl_random_pseudo_bytes(32);
-        // $key = 'oScGU3fj8m/tDCyvsbEhwI91M1FcwvQqWuFpPoDHlFk='; //echo base64_encode(openssl_random_pseudo_bytes(32));
-        // $iv = openssl_random_pseudo_bytes(16); //echo base64_encode(openssl_random_pseudo_bytes(16));
-        // echo '内容: ' . $data . "\n";
-        //
-        // $encrypted = openssl_encrypt($data, 'aes-256-cbc', base64_decode($key), OPENSSL_RAW_DATA, $iv);
-        // echo '加密: ' . base64_encode($encrypted) . "\n";
-        //
-        // // $encrypted = base64_decode('To3QFfvGJNm84KbKG1PLzA==');
-        // $decrypted = openssl_decrypt($encrypted, 'aes-256-cbc', base64_decode($key), OPENSSL_RAW_DATA, $iv);
-        // echo '解密: ' . $decrypted . "\n";
+        $data = 'phpbest';
+        $key = base64_encode(openssl_random_pseudo_bytes(32));
+        echo Color::head("KEY:"), PHP_EOL;
+        echo Color::colorize($key, Color::FG_GREEN), PHP_EOL;
+        $iv = base64_encode(openssl_random_pseudo_bytes(16)); //echo base64_encode(openssl_random_pseudo_bytes(16));
+        echo Color::head("IV:"), PHP_EOL;
+        echo Color::colorize($iv, Color::FG_GREEN), PHP_EOL;
+
+        echo Color::head("内容:"), PHP_EOL;
+        echo Color::colorize($data, Color::FG_GREEN), PHP_EOL;
+
+        $encrypted = openssl_encrypt($data, 'aes-256-cbc', base64_decode($key), OPENSSL_RAW_DATA, base64_decode($iv));
+        $encrypted = base64_encode($encrypted);
+        echo Color::head("加密:"), PHP_EOL;
+        echo Color::colorize($encrypted, Color::FG_GREEN), PHP_EOL;
+
+        $decrypted = openssl_decrypt(base64_decode($encrypted), 'aes-256-cbc', base64_decode($key), OPENSSL_RAW_DATA, base64_decode($iv));
+        echo Color::head("解密:"), PHP_EOL;
+        echo Color::colorize($decrypted, Color::FG_GREEN), PHP_EOL;
     }
 
     public function rsaAction()
