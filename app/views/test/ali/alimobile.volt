@@ -7,6 +7,7 @@
         document.write(1);
         document.addEventListener('AlipayJSBridgeReady', function () {
             document.write(typeof AlipayJSBridge);
+            document.write("AlipayJSBridgeReady");
         }, false);
     </script>
 {% endblock %}
