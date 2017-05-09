@@ -9,5 +9,11 @@
             document.write(typeof AlipayJSBridge);
             document.write("AlipayJSBridgeReady");
         }, false);
+
+        AlipayJSBridge.call('openAPDeviceLib', {'connType': 'blue'}, function (res) {
+            console.log('openAPDeviceLib', JSON.stringify(res));
+            document.write("openAPDeviceLib----");
+            document.write(JSON.stringify(res));
+        });
     </script>
 {% endblock %}
