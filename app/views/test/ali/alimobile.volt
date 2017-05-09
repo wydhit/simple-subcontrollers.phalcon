@@ -1,4 +1,4 @@
-{% extends "test/master.volt" %}
+{% extends "test/weui.volt" %}
 {% block content %}
     <div id="state"></div>
 {% endblock %}
