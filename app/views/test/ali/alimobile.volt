@@ -1,19 +1,29 @@
 {% extends "test/weui.volt" %}
 {% block content %}
-    <div id="state"></div>
+    <div class="weui-cells__title">日志信息</div>
+    <div class="weui-cells" id="logs">
+    </div>
 {% endblock %}
 {% block js %}
     <script>
-        document.write(1);
+        function push(msg) {
+            var item = '        <div class="weui-cell">\
+                <div class="weui-cell__bd">\
+                <p>' + msg + '</p>\
+                </div>\
+                </div>';
+            $("#logs").append(item);
+        }
+
         document.addEventListener('AlipayJSBridgeReady', function () {
-            document.write(typeof AlipayJSBridge);
-            document.write("AlipayJSBridgeReady");
+//            push(typeof AlipayJSBridge);
+            push("AlipayJSBridgeReady");
         }, false);
 
         AlipayJSBridge.call('openAPDeviceLib', {'connType': 'blue'}, function (res) {
             console.log('openAPDeviceLib', JSON.stringify(res));
-            document.write("openAPDeviceLib----");
-            document.write(JSON.stringify(res));
+            push("openAPDeviceLib");
+            push(JSON.stringify(res));
         });
     </script>
 {% endblock %}
