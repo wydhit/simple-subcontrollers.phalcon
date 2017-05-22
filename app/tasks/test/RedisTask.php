@@ -15,6 +15,7 @@ use Phalcon\Cli\Task;
 use limx\phalcon\DB;
 use limx\phalcon\Cli\Color;
 use Predis\Client;
+use swoole_process;
 
 class RedisTask extends Task
 {
@@ -85,6 +86,25 @@ LUA;
         $res = $client->eval($script, 1, 'phalcon:test:index');
         echo Color::colorize("Incr phalcon:test:index * 10：" . json_encode($res)) . PHP_EOL;
 
+        for ($i = 0; $i < 10; $i++) {
+            $process = new swoole_process([$this, 'luaTask']);
+            $process->start();
+        }
+
+    }
+
+    public function luaTask()
+    {
+        $client = $this->predisClient();
+        $script = <<<LUA
+    local values = {};
+    for i=1,10 do 
+        local val = redis.pcall('get',KEYS[1]);
+        values[#values+1]=redis.pcall('set',KEYS[1],val+1)
+    end 
+    return values;
+LUA;
+        $client->eval($script, 1, 'phalcon:test:index');
     }
 
     public function luaGetAction()
