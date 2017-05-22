@@ -2,6 +2,7 @@
 
 namespace App\Tasks\Test;
 
+use App\Logics\Test;
 use App\Utils\Cache;
 use limx\phalcon\Cli\Color;
 
@@ -19,7 +20,16 @@ class CacheTask extends \Phalcon\Cli\Task
 
         echo Color::head('Actions:') . PHP_EOL;
         echo Color::colorize('  save                   缓存存储', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  logic                  逻辑层缓存测试', Color::FG_GREEN), PHP_EOL;
 
+    }
+
+    public function logicAction()
+    {
+        $res = Test::getTimeFromCache();
+        echo $res;
+        $res = Test::getTimeFromCache(1);
+        echo $res;
     }
 
     public function saveAction()
