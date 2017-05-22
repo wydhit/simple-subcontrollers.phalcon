@@ -20,7 +20,6 @@ $loader
             'App\Models' => $config->application->modelsDir,
             'App\Tasks' => $config->application->tasksDir,
             'App\Traits' => $config->application->traitsDir,
-            'App\Traits' => $config->application->traitsDir,
             'App\Utils' => $config->application->utilsDir,
         ]
     )->registerFiles(
