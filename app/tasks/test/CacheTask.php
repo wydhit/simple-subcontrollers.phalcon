@@ -7,7 +7,7 @@ use limx\phalcon\Cli\Color;
 
 class CacheTask extends \Phalcon\Cli\Task
 {
-    const CACHE_KEY = 'cache:phalcon:test';
+    const CACHE_KEY = 'phalcon:test';
 
     public function mainAction()
     {
