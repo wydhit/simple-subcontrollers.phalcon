@@ -27,7 +27,7 @@ $loader
 
             'App\Tasks' => $config->application->tasksDir,
             'App\Tasks\System' => $config->application->tasksDir . 'system/',
-            'App\Tasks\Test' => $config->application->tasksDir . 'test/',
+            //'App\Tasks\Test' => $config->application->tasksDir . 'test/',
             'App\Tasks\Swoole' => $config->application->tasksDir . 'swoole/',
 
             'App\Traits' => $config->application->traitsDir,

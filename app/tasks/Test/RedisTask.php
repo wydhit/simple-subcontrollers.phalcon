@@ -14,6 +14,7 @@ use App\Utils\Redis as RedisUtil;
 use Phalcon\Cli\Task;
 use limx\phalcon\DB;
 use limx\phalcon\Cli\Color;
+use Phalcon\Exception;
 use Predis\Client;
 use swoole_process;
 
@@ -40,6 +41,26 @@ class RedisTask extends Task
         echo Color::colorize('  predisKeys      predis扩展的keys方法', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  luaGet          lua脚本get方法', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  lua             lua脚本操作方法', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  luasha1         lua脚本evalsha操作方法', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function luasha1Action($params = [])
+    {
+        $client = $this->predisClient();
+        if (count($params) == 0) {
+            $len = 10;
+        } else {
+            $len = intval($params[0]);
+        }
+        $script = <<<LUA
+    local values = {};
+    for i=1,$len do 
+        values[#values+1] = redis.pcall('incr',KEYS[1]); 
+    end 
+    return values;
+LUA;
+        $res = $client->evalsha(sha1($script), 1, 'phalcon:test:index');
+        echo Color::colorize(sprintf("Incr phalcon:test:index * %d：%s", $len, json_encode($res))) . PHP_EOL;
     }
 
     public function luaAction()
@@ -98,7 +119,7 @@ LUA;
         $client = $this->predisClient();
         $script = <<<LUA
     local values = {};
-    for i=1,10 do 
+    for i=1,100 do 
         local val = redis.pcall('get',KEYS[1]);
         values[#values+1]=redis.pcall('set',KEYS[1],val+1)
     end 
