@@ -331,7 +331,7 @@ class AliController extends ControllerBase
     public function openSearchV2NearAction()
     {
         $client = $this->openSearchV2Client();
-        $appName = 'test_lbs';
+        $index_name = 'test_lbs';
         $longitude = 121.0;
         $latitude = 31.0;
         $query = "name:'搜索'";
@@ -339,6 +339,7 @@ class AliController extends ControllerBase
         $kvpairs = sprintf("longitude_input:%s,latitude_input:%s", $longitude, $latitude);
 
         $search = new \App\Logics\OpenSearch\CloudsearchSearch($client);
+        $search->addIndex($index_name);
         $search->setQueryString($query);
         $search->addFilter($fileter);
         $search->setFormat('fulljson');

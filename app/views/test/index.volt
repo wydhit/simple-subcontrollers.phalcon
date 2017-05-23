@@ -115,7 +115,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/ali/openSearchNear') }}">
                     OpenSearch 搜索附近的文档
                 </a>
-                <a type="button" class="btn btn-default" href="{{ url('test/ali/openSearchNear') }}">
+                <a type="button" class="btn btn-default" href="{{ url('test/ali/openSearchV2Near') }}">
                     OpenSearch v2版本 搜索附近的文档
                 </a>
             </div>
