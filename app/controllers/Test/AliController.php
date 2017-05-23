@@ -347,9 +347,9 @@ class AliController extends ControllerBase
         $search->setPair($kvpairs);
         $search->setStartHit(0);
         $search->setHits(20);
-        $ret = $search->search();
+        $ret = json_decode($search->search(), true);
         dump($ret);
-        dump(json_decode($ret->result, true));
+        dump($ret['result']);
     }
 }
 
