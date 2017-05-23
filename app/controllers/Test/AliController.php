@@ -299,7 +299,7 @@ class AliController extends ControllerBase
         $params->setFilter($distance . "<100");
         // 精排表达式
         $params->setSecondRankName('distance');
-        $params->setKvPairs(sprintf('longitude_input:"%s", latitude_input:"%s"', $longitude, $latitude));
+        $params->setKvPairs(sprintf('longitude_input:%s, latitude_input:%s', $longitude, $latitude));
         // 指定返回的搜索结果的格式为json
         $params->setFormat("fulljson");
         //添加排序字段
