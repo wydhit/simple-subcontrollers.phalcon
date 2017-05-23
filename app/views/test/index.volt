@@ -112,6 +112,9 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/ali/openSearchName') }}">
                     OpenSearch 搜索索引为name的文档
                 </a>
+                <a type="button" class="btn btn-default" href="{{ url('test/ali/openSearchNear') }}">
+                    OpenSearch 搜索附近的文档
+                </a>
             </div>
             <div class="col-md-12">
                 <h3>
