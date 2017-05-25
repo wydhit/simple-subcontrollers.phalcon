@@ -35,32 +35,6 @@ class QueueTask extends \App\Tasks\System\QueueTask
     }
 
     /**
-     * @desc   子进程也能监听消息队列
-     *         3秒内没有消息自动回收
-     * @author limx
-     * @param $data
-     */
-    protected function run($data)
-    {
-        $this->handle($data);
-        $redis = $this->redisChildClient();
-        while (true) {
-            // 无任务时,阻塞等待
-            $data = $redis->brpop($this->queueKey, 3);
-            if (!$data) {
-                break;
-            }
-            if ($data[0] != $this->queueKey) {
-                // 消息队列KEY值不匹配
-                continue;
-            }
-            if (isset($data[1])) {
-                $this->handle($data[1]);
-            }
-        }
-    }
-
-    /**
      * @desc   消息队列处理逻辑
      * @author limx
      * @param $data
@@ -69,8 +43,5 @@ class QueueTask extends \App\Tasks\System\QueueTask
     {
         echo Color::success($data);
         Log::info($data);
-        swoole_timer_after(1000, function () use ($data) {
-            Log::info("after" . $data);
-        });
     }
 }
