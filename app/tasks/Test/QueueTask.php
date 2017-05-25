@@ -46,4 +46,26 @@ class QueueTask extends \App\Tasks\System\QueueTask
         echo Color::success($data);
         Log::info($data);
     }
+
+    public function testAction()
+    {
+        $redis = $this->redisChildClient();
+        for ($i = 0; $i < 5000; $i++) {
+            $data = [
+                'id' => $i,
+                'timestamp' => time(),
+                'data' => 'queue',
+            ];
+            $redis->lpush($this->queueKey, json_encode($data));
+        }
+        for ($i = 0; $i < 10; $i++) {
+            $data = [
+                'id' => $i,
+                'timestamp' => time(),
+                'data' => 'delay queue',
+            ];
+            $redis->zadd($this->delayKey, time() + 10, json_encode($data));
+        }
+    }
+
 }
