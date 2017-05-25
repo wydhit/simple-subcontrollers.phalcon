@@ -21,6 +21,8 @@ class QueueTask extends \App\Tasks\System\QueueTask
     protected $process = 0;
     // 消息队列Redis键值
     protected $queueKey = 'phalcon:test:queue';
+    // 延时消息队列的Redis键值 zset
+    protected $delayKey = 'phalcon:test:queue:delay';
     // 等待时间
     protected $waittime = 1;
 
