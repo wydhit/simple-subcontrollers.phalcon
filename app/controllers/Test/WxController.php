@@ -152,7 +152,10 @@ class WxController extends \Phalcon\Mvc\Controller
 
     public function wechatCallbackAction()
     {
-        echo "Callback";
+        $config = app('easywechat');
+        $app = new Application($config);
+        $user = $app->oauth->user();
+        dump($user);
     }
 
     private function httpGet($url, $params)
