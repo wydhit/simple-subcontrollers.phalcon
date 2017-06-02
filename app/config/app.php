@@ -31,7 +31,7 @@ return [
          * 账号基本信息，请从微信公众平台/开放平台获取
          */
         'app_id' => env('WECHAT_OPENID', 'your-app-id'),         // AppID
-        'secret' => env('WECHAT_PC_SECRET', 'your-app-secret'),     // AppSecret
+        'secret' => env('WECHAT_APPSECRET', 'your-app-secret'),     // AppSecret
         'token' => 'your-token',          // Token
         'aes_key' => '',                    // EncodingAESKey，安全模式下请一定要填写！！！
         /**
