@@ -43,6 +43,14 @@ class RedisTask extends Task
         echo Color::colorize('  lua             lua脚本操作方法', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  luasha1         lua脚本evalsha操作方法', Color::FG_GREEN), PHP_EOL;
         echo Color::colorize('  withtime        写入数据同时设置超时时间', Color::FG_GREEN), PHP_EOL;
+        echo Color::colorize('  model           RedisModel测试', Color::FG_GREEN), PHP_EOL;
+    }
+
+    public function modelAction()
+    {
+        $info = \App\Models\User::findFirst(1)->toArray();
+        $model = new \App\Models\RedisModel\User();
+        echo $model->replace(1, $info);
     }
 
     public function withtimeAction()
