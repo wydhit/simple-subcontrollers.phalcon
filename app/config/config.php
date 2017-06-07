@@ -26,7 +26,7 @@ return new Config(
         | This value is version for this project.
         |
         */
-        'version' => '1.7.13',
+        'version' => '1.8.5',
 
         /*
         |--------------------------------------------------------------------------
@@ -133,7 +133,7 @@ return new Config(
             'listenersDir' => APP_PATH . '/listeners/',
             'logicsDir' => APP_PATH . '/logics/',
             'modelsDir' => APP_PATH . '/models/',
-            'servicesDir' => APP_PATH . '/services/',
+            'servicesDir' => APP_PATH . '/config/services/',
             'tasksDir' => APP_PATH . '/tasks/',
             'traitsDir' => APP_PATH . '/traits/',
             'utilsDir' => APP_PATH . '/utils/',
@@ -161,12 +161,27 @@ return new Config(
         | Log Environment
         |--------------------------------------------------------------------------
         |
-        | If sql is set to true, then we write a log at the end of each sql.
+        | If db is set to true, then we write a log at the end of each sql.
         |
         */
         'log' => [
             'db' => env('LOG_DB', true),
             'error' => env('LOG_ERROR', true),
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Model Meta Environment
+        |--------------------------------------------------------------------------
+        |
+        | The modelMetaData support file and redis.
+        |
+        */
+        'modelMeta' => [
+            'driver' => env('MODELMETA_DRIVER', 'file'),
+            'statsKey' => '_PHCM_MM',
+            'lifetime' => 172800,
+            'index' => env('REDIS_INDEX', 0),
         ],
 
         /*
@@ -231,20 +246,20 @@ return new Config(
         */
         'services' => [
             'mvc' => [
-                'system/session.php',
-                'system/cache.php',
-                'system/error.php',
-                'system/cookies.php',
-                'system/crypt.php',
-                // 'system/redis.php',
-                // 'system/mongo.php',
+                'session.php',
+                'cache.php',
+                'error.php',
+                'cookies.php',
+                'crypt.php',
+                // 'redis.php',
+                // 'mongo.php',
             ],
             'cli' => [
-                'system/cache.php',
-                'system/error.php',
-                'system/crypt.php',
-                // 'system/redis.php',
-                // 'system/mongo.php',
+                'cache.php',
+                'error.php',
+                'crypt.php',
+                // 'redis.php',
+                // 'mongo.php',
             ],
         ],
 
