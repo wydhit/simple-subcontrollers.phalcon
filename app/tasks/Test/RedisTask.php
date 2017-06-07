@@ -199,6 +199,8 @@ LUA;
             uniqid()
         );
         print_r($redis);
+
+        print_r($redis instanceof \limx\utils\Redis);
     }
 
     public function staticAction()
