@@ -15,22 +15,11 @@ $loader
     ->registerNamespaces(
         [
             'App\Controllers' => $config->application->controllersDir,
-            'App\Controllers\Test' => $config->application->controllersDir . 'test/',
-
             'App\Listeners' => $config->application->listenersDir,
-            'App\Listeners\System' => $config->application->listenersDir . 'system/',
-
             'App\Logics' => $config->application->logicsDir,
-
             'App\Models' => $config->application->modelsDir,
-
             'App\Tasks' => $config->application->tasksDir,
-            'App\Tasks\System' => $config->application->tasksDir . 'system/',
-            'App\Tasks\Test' => $config->application->tasksDir . 'test/',
-
             'App\Traits' => $config->application->traitsDir,
-            'App\Traits\System' => $config->application->traitsDir . 'system/',
-
             'App\Utils' => $config->application->utilsDir,
         ]
     )->registerFiles(

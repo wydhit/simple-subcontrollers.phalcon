@@ -29,4 +29,24 @@ class Redis
         return $redis->select($db);
     }
 
+    public static function incr($key, $expiretime = null)
+    {
+        $redis = di('redis');
+        if (isset($expiretime)) {
+            $script = \App\Utils\Redis\Commands\IncrCommand::getScript();
+            return $redis->evaluate($script, [$key, $expiretime], 2);
+        }
+        return $redis->incr($key);
+    }
+
+    public static function incrBy($key, $number, $expiretime = null)
+    {
+        $redis = di('redis');
+        if (isset($expiretime)) {
+            $script = \App\Utils\Redis\Commands\IncrByCommand::getScript();
+            return $redis->evaluate($script, [$key, $number, $expiretime], 3);
+        }
+        return $redis->incrBy($key, $number);
+    }
+
 }
