@@ -57,8 +57,8 @@ class AliController extends ControllerBase
     public function infoAction()
     {
         $code = $this->request->get('auth_code');
-        $appid = env('ALIPAY_APPID');
-        $redirect_uri = env('APP_URL') . '/test/ali/info';
+        $appid = env('MONSTER_ALIPAY_APPID');
+        $redirect_uri = env('MONSTER_ALIPAY_REDIRECT_URI');
         if (empty($code)) {
             // 获取code
             $url = 'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?';
@@ -72,9 +72,9 @@ class AliController extends ControllerBase
         library('alipay/AopSdk.php');
         $aop = new \AopClient();
         $aop->gatewayUrl = 'https://openapi.alipay.com/gateway.do';
-        $aop->appId = env('ALIPAY_APPID');
-        $aop->rsaPrivateKey = env('ALIPAY_PRIKEY');
-        $aop->alipayrsaPublicKey = env('ALIPAY_PUBKEY');
+        $aop->appId = env('MONSTER_ALIPAY_APPID');
+        $aop->rsaPrivateKey = env('MONSTER_ALIPAY_APP_PRIVATE_KEY');
+        $aop->alipayrsaPublicKey = env('MONSTER_ALIPAY_ALI_PUBLIC_KEY');
         $aop->apiVersion = '1.0';
         $aop->format = 'json';
 
@@ -92,6 +92,8 @@ class AliController extends ControllerBase
         $result = $aop->execute($request, $access_token);
 
         dump($result);
+
+        dump("USERID" . $user_id);
 
     }
 
