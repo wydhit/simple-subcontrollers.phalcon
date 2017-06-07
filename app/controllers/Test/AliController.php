@@ -96,7 +96,6 @@ class AliController extends ControllerBase
     }
 
     /**
-     * [userinfoAction desc]
      * @desc   APP 获取用户信息
      * @author limx
      * @throws \Exception
