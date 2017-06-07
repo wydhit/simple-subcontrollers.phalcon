@@ -48,7 +48,6 @@ class AliController extends ControllerBase
     }
 
     /**
-     * [infoAction desc]
      * @desc   支付宝内WAP获取用户信息
      * @author limx
      * @return mixed
@@ -75,6 +74,8 @@ class AliController extends ControllerBase
         $aop->appId = env('MONSTER_ALIPAY_APPID');
         $aop->rsaPrivateKey = env('MONSTER_ALIPAY_APP_PRIVATE_KEY');
         $aop->alipayrsaPublicKey = env('MONSTER_ALIPAY_ALI_PUBLIC_KEY');
+        $aop->signType = 'RSA2';
+        $aop->postCharset='UTF-8';
         $aop->apiVersion = '1.0';
         $aop->format = 'json';
 
