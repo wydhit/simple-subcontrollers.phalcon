@@ -122,6 +122,9 @@ class UnitTest extends UnitTestCase
         $test = di('app')->easywechat->debug;
         $this->assertTrue($test);
 
+        $err = app('error-code.500');
+        $this->assertEquals('服务器错误！', $err);
+
     }
 
 }
