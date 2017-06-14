@@ -119,7 +119,8 @@ class UnitTest extends UnitTestCase
         $project = di('app')->get('project-name');
         $this->assertEquals('limx-phalcon-project', $project);
 
-        $test = di('app')->get();
+        $test = di('app')->easywechat->debug;
+        $this->assertTrue($test);
 
     }
 
