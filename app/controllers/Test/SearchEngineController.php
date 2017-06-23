@@ -67,5 +67,10 @@ class SearchEngineController extends Controller
         dump($docs);
     }
 
+    public function esAddDocAction()
+    {
+        echo 1;
+    }
+
 }
 

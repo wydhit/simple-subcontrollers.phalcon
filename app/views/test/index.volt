@@ -141,7 +141,11 @@
                 <h3>搜索引擎</h3>
                 <a type="button" class="btn btn-default" href="{{ url('test/search_engine/xsAddDoc') }}">讯搜 - 添加文档</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/search_engine/xsSearchDoc') }}">
-                    讯搜 - 搜索文档</a>
+                    讯搜 - 搜索文档
+                </a>
+                <a type="button" class="btn btn-default" href="{{ url('test/search_engine/esAddDoc') }}">
+                    Elasticsearch - 添加文档
+                </a>
             </div>
         </div>
     </div>
