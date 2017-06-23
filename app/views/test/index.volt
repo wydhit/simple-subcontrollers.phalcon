@@ -48,6 +48,7 @@
                 <a type="button" class="btn btn-default" href="{{ url('test/index/locationIp') }}">所在的IP</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/view/post') }}">Post测试</a>
                 <a type="button" class="btn btn-default" href="{{ url('test/file/ajax') }}">跨域测试</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/xunsearch/index') }}">双峰控制器测试路由</a>
             </div>
             <div class="col-md-12">
                 <h3>
