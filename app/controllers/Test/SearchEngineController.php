@@ -5,7 +5,7 @@ namespace App\Controllers\Test;
 use App\Controllers\Controller;
 use App\Models\TestSphinx;
 
-class XunSearchController extends Controller
+class SearchEngineController extends Controller
 {
     public function initialize()
     {
@@ -19,13 +19,13 @@ class XunSearchController extends Controller
         echo "XunSearch::index";
     }
 
-    public function addDocAction()
+    public function xsAddDocAction()
     {
         $xs = new \XS('demo'); // 建立 XS 对象，项目名称为：demo
         $index = $xs->index; // 获取 索引对象
         // 执行清空操作
         $index->clean();
-        
+
         $step = 100;
         $begin = 0;
         $users = [1];
@@ -50,7 +50,7 @@ class XunSearchController extends Controller
         }
     }
 
-    public function searchDocAction()
+    public function xsSearchDocAction()
     {
         $xs = new \XS('demo'); // 建立 XS 对象，项目名称为：demo
         $search = $xs->search; // 获取 搜索对象
@@ -65,11 +65,6 @@ class XunSearchController extends Controller
         $count = $search->count(); // 获取搜索结果的匹配总数估算值
         dump($count);
         dump($docs);
-    }
-
-    public function flushDocAction()
-    {
-
     }
 
 }
