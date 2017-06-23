@@ -23,7 +23,9 @@ class XunSearchController extends Controller
     {
         $xs = new \XS('demo'); // 建立 XS 对象，项目名称为：demo
         $index = $xs->index; // 获取 索引对象
-
+        // 执行清空操作
+        $index->clean();
+        
         $step = 100;
         $begin = 0;
         $users = [1];
@@ -46,6 +48,28 @@ class XunSearchController extends Controller
                 $index->add($doc);
             }
         }
+    }
+
+    public function searchDocAction()
+    {
+        $xs = new \XS('demo'); // 建立 XS 对象，项目名称为：demo
+        $search = $xs->search; // 获取 搜索对象
+
+        $query = '超级'; // 这里的搜索语句很简单，就一个短语
+
+        $search->setQuery($query); // 设置搜索语句
+        // $search->addWeight('subject', 'xunsearch'); // 增加附加条件：提升标题中包含 'xunsearch' 的记录的权重
+        // $search->setLimit(5, 0); // 设置返回结果最多为 5 条，并跳过前 10 条
+
+        $docs = $search->search(); // 执行搜索，将搜索结果文档保存在 $docs 数组中
+        $count = $search->count(); // 获取搜索结果的匹配总数估算值
+        dump($count);
+        dump($docs);
+    }
+
+    public function flushDocAction()
+    {
+
     }
 
 }

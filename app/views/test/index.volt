@@ -139,6 +139,7 @@
             <div class="col-md-12">
                 <h3>讯搜测试</h3>
                 <a type="button" class="btn btn-default" href="{{ url('test/xun_search/addDoc') }}">添加文档</a>
+                <a type="button" class="btn btn-default" href="{{ url('test/xun_search/searchDoc') }}">搜索文档</a>
             </div>
         </div>
     </div>
