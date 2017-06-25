@@ -82,7 +82,14 @@ class MongoDBTask extends Task
 
     public function collectionUpdateAction()
     {
-        
+        $user = \App\Models\Collections\User::findFirst([
+            'conditions' => ['id' => 95]
+        ]);
+
+        $user->name = Str::quickRandom(12);
+        $user->save();
+
+        print_r($user->toArray());
     }
 
     public function logicFindFirstAction()
