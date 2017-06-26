@@ -90,6 +90,5 @@ class ApiController extends Controller
 
         return self::success($res);
     }
-
 }
 
