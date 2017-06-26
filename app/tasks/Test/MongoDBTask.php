@@ -177,6 +177,7 @@ class MongoDBTask extends Task
     {
         $filter = ['id' => 999];
         $document = ['name' => uniqid(), 'changed' => 2];
+        $document = ['name' => uniqid()];
         $options = [
             Mongo::OPTION_UPSERT => true,
             Mongo::OPTION_MULTI => true,

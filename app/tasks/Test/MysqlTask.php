@@ -55,6 +55,12 @@ class MysqlTask extends Task
         $user->username = Str::quickRandom(12);
         $res = $user->save();
         print_r($res);
+
+        // $user = new \App\Models\User();
+        // $user->id = 24;
+        // $user->username = Str::quickRandom(6);
+        // $res = $user->save();
+        // print_r($res);
     }
 
     public function incAction()
